@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Marionette
 {
+    /// <summary>
+    /// Locomotion controls basic steering. Give it a destination and it moves there.
+    /// </summary>
     public class Locomotion : MonoBehaviour
     {
         [SerializeField]
@@ -73,16 +76,16 @@ namespace Marionette
         public void MoveTo(Vector3 destination)
         {
             this.destination = destination;
-            
+
         }
 
         private void Update()
         {
-            Look();
+            Rotate();
             Move();
         }
 
-        private void Look()
+        private void Rotate()
         {
             var rotation = Quaternion.Inverse(transform.rotation) * Quaternion.LookRotation(rotation_towards_destination);
             transform.Rotate(rotation.eulerAngles);
@@ -92,7 +95,7 @@ namespace Marionette
         {
             Debug.DrawLine(transform.position, destination);
 
-            // mix forward movement and direction to destination 50/50
+            // blend forward movement and direction to destination 50/50
             var translation = (local_direction_to_destination + Vector3.forward).normalized * movement_step;
             transform.Translate(translation, Space.Self);
         }
