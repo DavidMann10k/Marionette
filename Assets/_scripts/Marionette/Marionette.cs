@@ -1,20 +1,34 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Marionette
 {
-    [RequireComponent(typeof(Locomotion))]
-    public class Marionette : MonoBehaviour
-    {
-        Locomotion locomotion;
+	[RequireComponent (typeof(Locomotion))]
+	public class Marionette : MonoBehaviour
+	{
+		public Locomotion locomotion { get; private set; }
 
-        private void Start()
-        {
-            locomotion = gameObject.GetComponent<Locomotion>();
-        }
+		List<IDirective> directives = new List<IDirective> ();
 
-        void Update()
-        {
+		IDirective current_directive;
 
-        }
-    }
+		public void AddDirective (IDirective directive)
+		{
+			directives.Add (directive);
+		}
+
+		private void Start ()
+		{
+			locomotion = gameObject.GetComponent<Locomotion> ();
+		}
+
+		void Update ()
+		{
+			if (current_directive == null && directives.Count > 0) {
+				current_directive = directives.OrderBy (i => i.Priority).First ();
+				current_directive.Execute (this);
+			}
+		}
+	}
 }
