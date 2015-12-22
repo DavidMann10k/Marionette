@@ -2,6 +2,6 @@
 {
 	public interface IBehavior
 	{
-		void CreateDirective ();
+		void ConcludeDirective (IDirective directive);
 	}
 }

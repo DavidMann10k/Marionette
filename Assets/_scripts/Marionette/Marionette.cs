@@ -30,8 +30,8 @@ namespace Marionette
 				current_directive = directives.OrderBy (i => i.Priority).First ();
 				current_directive.Execute (this);
 			} else if (current_directive.IsComplete (this)) {
+				current_directive.Behavior.ConcludeDirective (current_directive);
 				directives.Remove (current_directive);
-				current_directive.Behavior.CreateDirective ();
 				current_directive = null;
 			}
 		}

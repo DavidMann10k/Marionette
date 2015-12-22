@@ -6,11 +6,17 @@ namespace Marionette
 	[RequireComponent (typeof(Marionette))]
 	public class Wanders : MonoBehaviour, IBehavior
 	{
+
 		[SerializeField]
 		float distance = 5;
 		Marionette marionette;
 
-		public void CreateDirective ()
+		public void ConcludeDirective (IDirective directive)
+		{
+			CreateDirective ();
+		}
+
+		void CreateDirective ()
 		{
 			marionette.AddDirective (new MoveDirective (RandomNearbyPosition, this));
 		}
