@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Marionette
 {
+	// adds ability to collect inventoriable objects
 	public class Inventory : MonoBehaviour
 	{
 		List<Inventoriable> inventory = new List<Inventoriable> ();

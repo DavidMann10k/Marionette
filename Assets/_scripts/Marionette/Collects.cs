@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Marionette
 {
+	// Adds collecting behavior to an AI agent
 	public class Collects : MonoBehaviour, IBehavior
 	{
 		

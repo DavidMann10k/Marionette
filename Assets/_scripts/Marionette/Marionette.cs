@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Marionette
 {
+	// The central consciousness of a Marionette AI controlled agent
 	[RequireComponent (typeof(Locomotion))]
 	public class Marionette : MonoBehaviour
 	{

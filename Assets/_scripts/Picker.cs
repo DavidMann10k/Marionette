@@ -2,6 +2,7 @@
 using UnityEngine;
 using Marionette;
 
+// Picks and sets inventoriable things in the scene
 [RequireComponent (typeof(Marionette.Inventory))]
 public class Picker : MonoBehaviour
 {

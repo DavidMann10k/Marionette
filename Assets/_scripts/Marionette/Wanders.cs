@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Marionette
 {
+	// Adds wandering behavior to an AI agent
 	[RequireComponent (typeof(Marionette))]
 	public class Wanders : MonoBehaviour, IBehavior
 	{
