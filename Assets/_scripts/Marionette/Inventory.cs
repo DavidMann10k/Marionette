@@ -8,32 +8,34 @@ namespace Marionette
 	// adds ability to collect inventoriable objects
 	public class Inventory : MonoBehaviour
 	{
-		List<Inventoriable> inventory = new List<Inventoriable> ();
+		List<InventoryItem> inventory = new List<InventoryItem> ();
 
-		public void Store (Inventoriable item)
+		public void Store (Inventoriable inventoriable)
 		{
-			inventory.Add (item);
-			item.gameObject.SetActive (false);
-			Debug.Log ("Storign a " + item.gameObject.name);
-			Debug.Log (inventory.Count () + " items in store");
+			inventory.Add (new InventoryItem (inventoriable));
+			Destroy (inventoriable.gameObject);
+			// Debug.Log ("Storing a " + inventoriable.gameObject.name);
+			// Debug.Log (inventory.Count () + " items in store");
 		}
 
-		public Inventoriable UnStore (string name)
+		public GameObject UnStore (string name)
 		{
-			var item = inventory.First (i => i.name == name);
-			inventory.Remove (item);
-			return item;
-		}
-
-		public Inventoriable UnStore ()
-		{
-			var item = inventory.FirstOrDefault ();
+			var item = inventory.First (i => i.PrefabName == name);
 			if (item != null) {
 				inventory.Remove (item);
-				item.gameObject.SetActive (true);
-				return item;
+				// Debug.Log (item.PrefabName);
+				var prefab = Resources.Load<GameObject> (string.Format ("prefabs/{0}", item.PrefabName));
+				var go = Instantiate (prefab);
+				go.name = item.PrefabName;
+				return go;
 			}
 			return null;
+		}
+
+		public GameObject UnStore ()
+		{
+			var item = inventory.FirstOrDefault ();
+			return UnStore (item.PrefabName);
 		}
 	}
 }

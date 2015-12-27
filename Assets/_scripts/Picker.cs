@@ -28,10 +28,10 @@ public class Picker : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
-			Debug.Log (hit.transform.gameObject.name);
-			Inventoriable item = hit.transform.gameObject.GetComponent<Inventoriable> ();
-			if (item != null) {
-				inventory.Store (item);
+			// Debug.Log (hit.transform.gameObject.name);
+			Inventoriable inventoriable = hit.transform.gameObject.GetComponent<Inventoriable> ();
+			if (inventoriable != null) {
+				inventory.Store (inventoriable);
 			}
 		} else {
 			print ("nothing to pick!");

@@ -6,9 +6,11 @@ namespace Marionette
 	// Adds ability for an object to be added to an inventory
 	public class Inventoriable : MonoBehaviour
 	{
-		public Inventoriable (string name)
+		public string PrefabName { get; set; }
+
+		void Start ()
 		{
-			this.name = name;
+			PrefabName = this.name;
 		}
 	}
 }
