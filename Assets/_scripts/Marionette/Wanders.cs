@@ -14,18 +14,27 @@ namespace Marionette
 
 		public void ConcludeDirective (IDirective directive)
 		{
-			CreateDirective ();
+			if (directive.GetType () == typeof(MoveDirective)) {
+				CreatePauseDirective ();
+			} else {
+				CreateMoveDirective ();
+			}
 		}
 
-		void CreateDirective ()
+		void CreateMoveDirective ()
 		{
 			marionette.AddDirective (new MoveDirective (RandomNearbyPosition, this));
+		}
+
+		void CreatePauseDirective ()
+		{
+			marionette.AddDirective (new PauseDirective (1, this));
 		}
 
 		void Start ()
 		{
 			marionette = GetComponent<Marionette> ();
-			CreateDirective ();
+			CreateMoveDirective ();
 		}
 
 		Vector3 RandomNearbyPosition {
