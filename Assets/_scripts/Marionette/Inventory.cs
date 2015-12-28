@@ -35,7 +35,10 @@ namespace Marionette
 		public GameObject UnStore ()
 		{
 			var item = inventory.FirstOrDefault ();
-			return UnStore (item.PrefabName);
+			if (item != null) {
+				return UnStore (item.PrefabName);
+			}
+			return null;
 		}
 	}
 }
