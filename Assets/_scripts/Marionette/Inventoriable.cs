@@ -8,7 +8,7 @@ namespace Marionette
 	{
 		public string PrefabName { get; set; }
 
-		void Start ()
+		void Awake ()
 		{
 			PrefabName = this.name;
 		}
