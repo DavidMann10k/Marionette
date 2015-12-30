@@ -1,14 +1,14 @@
-﻿using System;
-
-namespace Marionette
+﻿namespace Marionette
 {
 	public class InventoryItem
 	{
-		public string PrefabName { get; set; }
+		public string ItemName { get { return item_name; } }
 
-		public InventoryItem (Inventoriable inventoriable)
+		string item_name;
+
+		public InventoryItem (string item_name)
 		{
-			this.PrefabName = inventoriable.PrefabName;
+			this.item_name = item_name;
 		}
 	}
 }

@@ -1,44 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Marionette
 {
-	// adds ability to collect inventoriable objects
+	// adds ability to store InventoryItems
 	public class Inventory : MonoBehaviour
 	{
-		List<InventoryItem> inventory = new List<InventoryItem> ();
+		public int ItemCount { get { return items.Count (); } }
 
-		public void Store (Inventoriable inventoriable)
+		public IEnumerable<InventoryItem> Items { get { return items; } }
+
+		List<InventoryItem> items = new List<InventoryItem> ();
+
+		public void Store (InventoryItem inventory_item)
 		{
-			inventory.Add (new InventoryItem (inventoriable));
-			Destroy (inventoriable.gameObject);
-			// Debug.Log ("Storing a " + inventoriable.gameObject.name);
-			// Debug.Log (inventory.Count () + " items in store");
+			if (inventory_item != null)
+				items.Add (inventory_item);
 		}
 
-		public GameObject UnStore (string name)
+		public InventoryItem Unstore (InventoryItem item)
 		{
-			var item = inventory.First (i => i.PrefabName == name);
-			if (item != null) {
-				inventory.Remove (item);
-				// Debug.Log (item.PrefabName);
-				var prefab = Resources.Load<GameObject> (string.Format ("prefabs/{0}", item.PrefabName));
-				var go = Instantiate (prefab);
-				go.name = item.PrefabName;
-				return go;
-			}
-			return null;
+			items.Remove (item);
+			return item;
 		}
 
-		public GameObject UnStore ()
+		public InventoryItem UnStore (string name)
 		{
-			var item = inventory.FirstOrDefault ();
-			if (item != null) {
-				return UnStore (item.PrefabName);
-			}
-			return null;
+			return Unstore (items.FirstOrDefault (i => i.ItemName == name));
+		}
+
+		public InventoryItem UnStore ()
+		{
+			return Unstore (items.FirstOrDefault ());
 		}
 	}
 }

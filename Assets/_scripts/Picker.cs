@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Marionette;
 
 // Picks and sets inventoriable things in the scene
@@ -29,12 +28,13 @@ public class Picker : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
 			// Debug.Log (hit.transform.gameObject.name);
-			Inventoriable inventoriable = hit.transform.gameObject.GetComponent<Inventoriable> ();
-			if (inventoriable != null) {
-				inventory.Store (inventoriable);
+			Inventory target_inventory = hit.transform.gameObject.GetComponent<Inventory> ();
+			if (target_inventory != null) {
+				// take an InventoryItem from the clicked inventory
+				inventory.Store (target_inventory.UnStore ());
 			}
 		} else {
-			print ("nothing to pick!");
+			print ("No inventory found!");
 		}
 	}
 
@@ -43,12 +43,14 @@ public class Picker : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
+			Inventory target_inventory = hit.transform.gameObject.GetComponent<Inventory> ();
 			var item = inventory.UnStore ();
-			if (item != null) {
-				item.gameObject.transform.position = hit.point;
+			if (target_inventory != null) {
+				// put an InventoryItem into the clicked inventory
+				target_inventory.Store (inventory.UnStore ());
 			}
 		} else {
-			print ("nowhere to set!");
+			print ("No inventory found!");
 		}
 	}
 }
