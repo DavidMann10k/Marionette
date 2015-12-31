@@ -7,7 +7,7 @@ public class GenericChest : MonoBehaviour
 {
 	Inventory inventory;
 
-	void Start ()
+	void Awake ()
 	{
 		inventory = GetComponent<Inventory> ();
 
