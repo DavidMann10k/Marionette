@@ -60,13 +60,23 @@ namespace Marionette
 
 		public void MoveTo (Vector3 destination)
 		{
+			enabled = true;
 			this.destination = destination;
+		}
+
+		void Start ()
+		{
+			enabled = false;
 		}
 
 		private void Update ()
 		{
 			Rotate ();
 			Move ();
+
+			if (distance_to_destination < 1) {
+				enabled = false;
+			}
 		}
 
 		private void Rotate ()
@@ -77,13 +87,10 @@ namespace Marionette
 
 		private void Move ()
 		{
-			if (distance_to_destination > .5f) {
-				Debug.DrawLine (transform.position, destination);
-
-				// blend forward movement and direction to destination 50/50
-				var translation = (local_direction_to_destination + Vector3.forward).normalized * movement_step;
-				transform.Translate (translation, Space.Self);
-			}
+			// Debug.DrawLine (transform.position, destination);
+			// blend forward movement and direction to destination 50/50
+			var translation = (local_direction_to_destination + Vector3.forward).normalized * movement_step;
+			transform.Translate (translation, Space.Self);
 		}
 	}
 }
