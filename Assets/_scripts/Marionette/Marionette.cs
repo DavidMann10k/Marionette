@@ -27,13 +27,15 @@ namespace Marionette
 
 		void Update ()
 		{
-			if (current_directive == null && directives.Count > 0) {
-				current_directive = directives.OrderBy (i => i.Priority).First ();
-				current_directive.Execute (this);
-			} else if (current_directive.IsComplete (this)) {
-				current_directive.Behavior.ConcludeDirective (current_directive);
-				directives.Remove (current_directive);
-				current_directive = null;
+			if (directives.Count > 0) {
+				if (current_directive == null) {
+					current_directive = directives.OrderBy (i => i.Priority).First ();
+					current_directive.Execute (this);
+				} else if (current_directive.IsComplete (this)) {
+					current_directive.Behavior.ConcludeDirective (current_directive);
+					directives.Remove (current_directive);
+					current_directive = null;
+				}
 			}
 		}
 	}
