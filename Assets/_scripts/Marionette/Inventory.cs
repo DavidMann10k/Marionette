@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Marionette
 {
 	// adds ability to store InventoryItems
 	public class Inventory : MonoBehaviour
 	{
+		public static event EventHandler<SelectInventoryArgs> SelectInventory;
+
 		public int ItemCount { get { return items.Count (); } }
 
 		public IEnumerable<InventoryItem> Items { get { return items; } }
@@ -33,6 +36,33 @@ namespace Marionette
 		public InventoryItem UnStore ()
 		{
 			return Unstore (items.FirstOrDefault ());
+		}
+
+		void Click ()
+		{
+			RaiseSelectedInventoryEvent ();
+		}
+
+		void RaiseSelectedInventoryEvent ()
+		{
+			try {
+				EventHandler<SelectInventoryArgs> handler = SelectInventory;
+				if (handler != null) {
+					handler (this, new SelectInventoryArgs (this));
+				}
+			} catch (Exception ex) {
+				Debug.LogError (ex.Message);
+			}
+		}
+	}
+
+	public class SelectInventoryArgs : EventArgs
+	{
+		public Inventory Inventory { get; set; }
+
+		public SelectInventoryArgs (Inventory inventory)
+		{
+			this.Inventory = inventory;
 		}
 	}
 }

@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class DebugPanel : MonoBehaviour {
+public class DebugPanel : MonoBehaviour
+{
+	public Text selectedText;
 
-    [SerializeField]
-    private Text selectedText;
+	void Start ()
+	{
+		Selectable.SelectgGameObject += new EventHandler<SelectGameObjectArgs> (updateText);
+	}
 
-	private void Update ()
-    {
-        if (Selectable.Selected == null)
-        {
-            selectedText.text = "Selected: None";
-        }
-        else
-        {
-            selectedText.text = "Selected: " + Selectable.Selected.name;
-        }
+	void updateText (object sender, SelectGameObjectArgs e)
+	{
+		if (String.IsNullOrEmpty (e.GameObject.name)) {
+			selectedText.text = "Selected: None";
+		} else {
+			selectedText.text = "Selected: " + e.GameObject.name;
+		}
 	}
 }

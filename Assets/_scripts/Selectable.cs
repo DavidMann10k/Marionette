@@ -2,21 +2,38 @@
 using UnityEngine;
 using System.Collections;
 
-public class Selectable : MonoBehaviour {
+public class Selectable : MonoBehaviour
+{
+	public static event EventHandler<SelectGameObjectArgs> SelectgGameObject;
 
-    public static GameObject Selected
-    {
-        get { return selected; }
-    }
+	private void Update ()
+	{
+	}
 
-    private static GameObject selected;
+	private void Click ()
+	{
+		RaiseSelectedInventoryEvent ();
+	}
 
-    private void Update()
-    {
-    }
+	void RaiseSelectedInventoryEvent ()
+	{
+		try {
+			EventHandler<SelectGameObjectArgs> handler = SelectgGameObject;
+			if (handler != null) {
+				handler (this, new SelectGameObjectArgs (gameObject));
+			}
+		} catch (Exception ex) {
+			Debug.LogError (ex.Message);
+		}
+	}
+}
 
-    private void Click()
-    {
-        selected = gameObject;
-    }
+public class SelectGameObjectArgs : EventArgs
+{
+	public GameObject GameObject { get; set; }
+
+	public SelectGameObjectArgs (GameObject game_object)
+	{
+		GameObject = game_object;
+	}
 }
