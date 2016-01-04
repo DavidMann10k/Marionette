@@ -24,14 +24,21 @@ namespace Marionette.UI
 			}
 		}
 
-		void OnSelectInventory (object sender, SelectInventoryArgs e)
+		void OnSelectGameObject (object sender, SelectGameObjectArgs e)
 		{
-			RefreshScrollView (e.Inventory);
+			var inventory = e.GameObject.GetComponentInChildren<Inventory> ();
+			this.gameObject.SetActive (inventory != null);
+			RefreshScrollView (inventory);
 		}
 
 		void Start ()
 		{
-			Inventory.SelectInventory += new EventHandler<SelectInventoryArgs> (OnSelectInventory);
+			Click.SelectgGameObject += new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
+		}
+
+		void OnDestroy ()
+		{
+			Click.SelectgGameObject -= new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
 		}
 	}
 }
