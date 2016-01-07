@@ -1,6 +1,6 @@
 ﻿namespace Marionette
 {
-	public class InventoryItem
+	public struct InventoryItem
 	{
 		public string ItemName { get { return item_name; } }
 

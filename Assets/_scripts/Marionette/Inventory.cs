@@ -16,8 +16,7 @@ namespace Marionette
 
 		public void Store (InventoryItem inventoryItem)
 		{
-			if (inventoryItem != null)
-				items.Add (inventoryItem);
+			items.Add (inventoryItem);
 		}
 
 		public InventoryItem Unstore (InventoryItem item)

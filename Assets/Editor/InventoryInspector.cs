@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEditor;
+using Marionette;
 
-namespace Marionette
+namespace Marionette.Inspectors
 {
 	[CustomEditor (typeof(Inventory))]
 	public class InventoryInspector : Editor
