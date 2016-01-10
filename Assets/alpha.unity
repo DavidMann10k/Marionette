@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -2054,15 +2054,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22403700, guid: 193c25bb2448b714bab4b24a647a25a9, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22403700, guid: 193c25bb2448b714bab4b24a647a25a9, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22403700, guid: 193c25bb2448b714bab4b24a647a25a9, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 22412380, guid: 193c25bb2448b714bab4b24a647a25a9, type: 2}
       propertyPath: m_AnchoredPosition.y

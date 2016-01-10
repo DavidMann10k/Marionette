@@ -6,7 +6,7 @@ namespace Marionette
 	/// <summary>
 	/// Locomotion controls basic steering. Give it a destination and it moves there.
 	/// </summary>
-	public class Locomotion : MonoBehaviour
+	public class Locomotion : MonoBehaviour, ILocomotion
 	{
 		[SerializeField]
 		private float movement_speed = 1f;

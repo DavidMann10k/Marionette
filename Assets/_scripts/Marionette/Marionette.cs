@@ -8,7 +8,7 @@ namespace Marionette
 	[RequireComponent (typeof(Locomotion))]
 	public class Marionette : MonoBehaviour
 	{
-		public Locomotion locomotion { get; private set; }
+		public ILocomotion locomotion { get; private set; }
 
 		List<IDirective> directives = new List<IDirective> ();
 
@@ -22,7 +22,7 @@ namespace Marionette
 
 		private void Start ()
 		{
-			locomotion = gameObject.GetComponent<Locomotion> ();
+			locomotion = gameObject.GetComponent<ILocomotion> ();
 		}
 
 		void Update ()
