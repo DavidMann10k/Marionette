@@ -24,9 +24,12 @@ namespace Marionette
 
 		void runParticle ()
 		{
-			particle.Clear ();
+			particle.Clear();
 			particle.transform.position = selected.transform.position;
 			particle.Play ();
+
+			var em = particle.emission;
+			em.enabled = true;
 		}
 	
 		// Update is called once per frame

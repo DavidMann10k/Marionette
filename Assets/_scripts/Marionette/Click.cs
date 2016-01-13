@@ -33,20 +33,19 @@ namespace Marionette
 
 		void ClickParticle (Vector3 position)
 		{
-			particle.Clear ();
 			particle.transform.position = position;
-			particle.Play ();
+			particle.Clear();
+			particle.Play();
+
+			var em = particle.emission;
+			em.enabled = true;
 		}
 
 		void RaiseSelectGameObjectEvent (GameObject game_object)
 		{
-			try {
-				EventHandler<SelectGameObjectArgs> handler = SelectgGameObject;
-				if (handler != null) {
-					handler (this, new SelectGameObjectArgs (game_object));
-				}
-			} catch (Exception ex) {
-				Debug.LogError (ex.Message);
+			EventHandler<SelectGameObjectArgs> handler = SelectgGameObject;
+			if (handler != null) {
+				handler (this, new SelectGameObjectArgs (game_object));
 			}
 		}
 	}

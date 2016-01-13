@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace Marionette
 {
@@ -11,7 +12,7 @@ namespace Marionette
 		[SerializeField]
 		int life = 5;
 
-		public ParticleSystem particle;
+		public ParticleSystem OnDeathparticle;
 
 		public void OnDamage (int damage)
 		{
@@ -20,9 +21,20 @@ namespace Marionette
 				OnDeath ();
 		}
 
-		public void OnDeath ()
+		void OnDeath ()
 		{
-			Destroy (this.gameObject);
+			StartCoroutine(Die());
+		}
+
+		IEnumerator Die()
+		{
+			OnDeathparticle.Play ();
+
+			var em = OnDeathparticle.emission;
+			em.enabled = true;
+
+			yield return new WaitForSeconds(OnDeathparticle.duration);
+			Destroy(this.gameObject);
 		}
 	}
 }
