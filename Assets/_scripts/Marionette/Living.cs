@@ -5,11 +5,11 @@ namespace Marionette
 {
 	public class Living : MonoBehaviour
 	{
-		public int Life { 
+		public Observable<int> Life { 
 			get { return life; }
 		}
 
-		TrackableInt life = 5;
+		Observable<int> life = new Observable<int> (5);
 
 		public ParticleSystem OnDeathparticle;
 
@@ -22,18 +22,18 @@ namespace Marionette
 
 		void OnDeath ()
 		{
-			StartCoroutine(Die());
+			StartCoroutine (Die ());
 		}
 
-		IEnumerator Die()
+		IEnumerator Die ()
 		{
 			OnDeathparticle.Play ();
 
 			var em = OnDeathparticle.emission;
 			em.enabled = true;
 
-			yield return new WaitForSeconds(OnDeathparticle.duration);
-			Destroy(this.gameObject);
+			yield return new WaitForSeconds (OnDeathparticle.duration);
+			Destroy (this.gameObject);
 		}
 	}
 }
