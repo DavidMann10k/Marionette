@@ -9,15 +9,14 @@ namespace Marionette
 			get { return life; }
 		}
 
-		[SerializeField]
-		int life = 5;
+		TrackableInt life = 5;
 
 		public ParticleSystem OnDeathparticle;
 
 		public void OnDamage (int damage)
 		{
-			life -= damage;
-			if (life <= 0)
+			life.Value -= damage;
+			if ((int)life <= 0)
 				OnDeath ();
 		}
 

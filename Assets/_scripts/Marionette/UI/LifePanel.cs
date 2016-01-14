@@ -27,8 +27,13 @@ namespace Marionette.UI
 				panel.SetActive(false);
 			} else {
 				panel.SetActive(true);
-				text.text = "Life: " + living.Life;
+				updateText(living.Life.ToString());
 			}
+		}
+
+		void updateText(string lifeValue)
+		{
+			text.text = "Life: " + lifeValue;
 		}
 	}
 }
