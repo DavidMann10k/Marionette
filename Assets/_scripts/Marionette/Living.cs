@@ -5,7 +5,7 @@ namespace Marionette
 {
 	public class Living : MonoBehaviour
 	{
-		public Observable<int> Life { 
+		public Observable<int> Life {
 			get { return life; }
 		}
 
@@ -32,7 +32,7 @@ namespace Marionette
 			var em = OnDeathparticle.emission;
 			em.enabled = true;
 
-			yield return new WaitForSeconds (OnDeathparticle.duration);
+			yield return new WaitForSeconds (OnDeathparticle.duration + 1.5f);
 			Destroy (this.gameObject);
 		}
 	}
