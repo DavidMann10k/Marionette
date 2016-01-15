@@ -17,7 +17,7 @@ namespace Marionette
 		{
 			life.Value -= damage;
 			if ((int)life <= 0)
-				OnDeath ();
+				gameObject.SendMessage ("OnDeath");
 		}
 
 		void OnDeath ()
