@@ -5,36 +5,32 @@ namespace Marionette
 {
 	public class Living : MonoBehaviour
 	{
-		public int Life { 
+		public Observable<int> Life {
 			get { return life; }
 		}
 
-		[SerializeField]
-		int life = 5;
+		Observable<int> life = new Observable<int> (5);
 
 		public ParticleSystem OnDeathparticle;
 
 		public void OnDamage (int damage)
 		{
-			life -= damage;
-			if (life <= 0)
-				OnDeath ();
+			life.Value -= damage;
+			if (life.Value <= 0)
+				gameObject.SendMessage ("OnDeath");
 		}
 
 		void OnDeath ()
 		{
-			StartCoroutine(Die());
+			StartCoroutine (Die ());
 		}
 
-		IEnumerator Die()
+		IEnumerator Die ()
 		{
 			OnDeathparticle.Play ();
 
-			var em = OnDeathparticle.emission;
-			em.enabled = true;
-
-			yield return new WaitForSeconds(OnDeathparticle.duration);
-			Destroy(this.gameObject);
+			yield return new WaitForSeconds (OnDeathparticle.duration);
+			Destroy (this.gameObject);
 		}
 	}
 }
