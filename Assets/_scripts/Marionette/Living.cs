@@ -16,7 +16,7 @@ namespace Marionette
 		public void OnDamage (int damage)
 		{
 			life.Value -= damage;
-			if ((int)life <= 0)
+			if (life.Value <= 0)
 				gameObject.SendMessage ("OnDeath");
 		}
 
@@ -29,10 +29,7 @@ namespace Marionette
 		{
 			OnDeathparticle.Play ();
 
-			var em = OnDeathparticle.emission;
-			em.enabled = true;
-
-			yield return new WaitForSeconds (OnDeathparticle.duration + 1.5f);
+			yield return new WaitForSeconds (OnDeathparticle.duration);
 			Destroy (this.gameObject);
 		}
 	}

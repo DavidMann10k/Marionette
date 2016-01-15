@@ -14,11 +14,6 @@ public class Observable<T>
 
 	T t;
 
-	public static implicit operator T (Observable<T> observable)
-	{
-		return observable.Value;
-	}
-
 	public Observable (T t)
 	{
 		this.t = t;
