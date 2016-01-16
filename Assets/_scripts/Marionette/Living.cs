@@ -9,7 +9,9 @@ namespace Marionette
 			get { return life; }
 		}
 
-		Observable<int> life = new Observable<int> (5);
+		public int InitialLife = 1;
+
+		Observable<int> life;
 
 		public ParticleSystem OnDeathparticle;
 
@@ -18,6 +20,11 @@ namespace Marionette
 			life.Value -= damage;
 			if (life.Value <= 0)
 				gameObject.SendMessage ("OnDeath");
+		}
+
+		void Awake ()
+		{
+			life = new Observable<int> (InitialLife);
 		}
 
 		void OnDeath ()
