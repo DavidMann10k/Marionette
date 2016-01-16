@@ -8,8 +8,27 @@ namespace Marionette
 {
 	// a collection of tools used to mimic senses such as sight or smell
 	[RequireComponent (typeof(Marionette))]
+	[RequireComponent (typeof(Rigidbody))]
 	public class Senses : MonoBehaviour
 	{
+		public SphereCollider AwarenessCollider;
+
+		public List<GameObject> NearbyAgents;
+
+		public bool DebugSenses = true;
+
+		void OnTriggerEnter (Collider collider)
+		{
+			if (collider.gameObject.tag == "Agent")
+				NearbyAgents.Add (collider.gameObject);
+		}
+
+		void OnTriggerExit (Collider collider)
+		{
+			if (NearbyAgents.Contains (collider.gameObject))
+				NearbyAgents.Remove (collider.gameObject);
+		}
+
 		private IEnumerable<PositionItemPair> FindProximateItems ()
 		{
 			var colliders = Physics.OverlapSphere (transform.position, 5);
@@ -24,6 +43,15 @@ namespace Marionette
 			var items_with_distance = FindProximateItems ().Select (i => new { position = i.Position, item = i.Item, distance = Vector3.Distance (origin, i.Position) });
 			var item = items_with_distance.OrderBy (i => i.distance).First ();
 			return new PositionItemPair (item.position, item.item);
+		}
+
+		void OnDrawGizmos ()
+		{
+			if (DebugSenses) {
+				foreach (GameObject go in NearbyAgents) {
+					Gizmos.DrawLine (transform.position, go.transform.position);
+				}
+			}
 		}
 	}
 
