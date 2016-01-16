@@ -38,5 +38,10 @@ namespace Marionette
 				}
 			}
 		}
+
+		void OnDeath ()
+		{
+			enabled = false;
+		}
 	}
 }

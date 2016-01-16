@@ -35,9 +35,9 @@ namespace Marionette
 		IEnumerator Die ()
 		{
 			OnDeathparticle.Play ();
-
 			yield return new WaitForSeconds (OnDeathparticle.duration);
-			Destroy (this.gameObject);
+			gameObject.AddComponent<Dead> ();
+			Destroy (this);
 		}
 	}
 }

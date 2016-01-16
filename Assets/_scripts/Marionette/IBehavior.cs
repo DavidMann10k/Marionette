@@ -3,5 +3,7 @@
 	public interface IBehavior
 	{
 		void ConcludeDirective (IDirective directive);
+
+		void OnDeath ();
 	}
 }

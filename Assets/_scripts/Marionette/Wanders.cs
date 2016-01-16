@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace Marionette
 {
@@ -7,7 +8,6 @@ namespace Marionette
 	[RequireComponent (typeof(Marionette))]
 	public class Wanders : MonoBehaviour, IBehavior
 	{
-
 		[SerializeField]
 		float distance = 5;
 		Marionette marionette;
@@ -39,10 +39,15 @@ namespace Marionette
 
 		Vector3 RandomNearbyPosition {
 			get {
-				var randomVector = Random.insideUnitCircle * distance;
+				var randomVector = UnityEngine.Random.insideUnitCircle * distance;
 				// TODO: replace with pathfinding determined destination
 				return marionette.transform.position + new Vector3 (randomVector.x, 0, randomVector.y);
 			}
+		}
+
+		public void OnDeath ()
+		{
+			Destroy (this);
 		}
 	}
 }

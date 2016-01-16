@@ -36,5 +36,10 @@ namespace Marionette
 			//   else
 			//     do nothing
 		}
+
+		public void OnDeath ()
+		{
+			this.enabled = false;
+		}
 	}
 }
