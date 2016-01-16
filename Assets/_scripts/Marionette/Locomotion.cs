@@ -69,7 +69,7 @@ namespace Marionette
 			enabled = false;
 		}
 
-		private void Update ()
+		void Update ()
 		{
 			Rotate ();
 			Move ();
@@ -79,13 +79,18 @@ namespace Marionette
 			}
 		}
 
-		private void Rotate ()
+		void OnDeath ()
+		{
+			enabled = false;
+		}
+
+		void Rotate ()
 		{
 			var rotation = Quaternion.Inverse (transform.rotation) * Quaternion.LookRotation (rotation_towards_destination);
 			transform.Rotate (rotation.eulerAngles);
 		}
 
-		private void Move ()
+		void Move ()
 		{
 			// Debug.DrawLine (transform.position, destination);
 			// blend forward movement and direction to destination 50/50
