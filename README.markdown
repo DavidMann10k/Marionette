@@ -4,3 +4,7 @@ This is an experimental project that will deal with AI. Specifically artificiall
 
 ## Usage
 Add a component implementing the `IBehavior` interface to a `GameObject`. All necessary dependencies will be added automatically. Marionette changes the `GameObject` to an AI controlled agent.
+
+## License
+
+[https://github.com/DavidMann10k/Marionette/blob/master/license.txt](Apache 2.0)
