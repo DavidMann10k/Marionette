@@ -13,7 +13,7 @@ namespace Marionette
 
 		Observable<int> life;
 
-		public ParticleSystem OnDeathparticle;
+		public GameObject OnDeathparticle;
 
 		public void OnDamage (int damage)
 		{
@@ -29,13 +29,7 @@ namespace Marionette
 
 		void OnDeath ()
 		{
-			StartCoroutine (Die ());
-		}
-
-		IEnumerator Die ()
-		{
-			OnDeathparticle.Play ();
-			yield return new WaitForSeconds (OnDeathparticle.duration);
+			var ps = Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
 			gameObject.AddComponent<Dead> ();
 			Destroy (this);
 		}

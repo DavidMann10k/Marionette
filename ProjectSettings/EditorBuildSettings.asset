@@ -5,5 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/_scenes/alpha.unity
   - enabled: 1
-    path: Assets/alpha.unity
+    path: Assets/_scenes/demonstrations/Living.unity
+  - enabled: 1
+    path: Assets/_scenes/demonstrations/Sensing.unity

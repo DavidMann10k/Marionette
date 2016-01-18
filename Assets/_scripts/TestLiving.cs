@@ -24,7 +24,7 @@ namespace Marionette
 
 		void runParticle ()
 		{
-			particle.Clear();
+			particle.Clear ();
 			particle.transform.position = selected.transform.position;
 			particle.Play ();
 
@@ -36,8 +36,10 @@ namespace Marionette
 		void Update ()
 		{
 			if (Input.GetMouseButtonUp (1)) {
-				selected.SendMessage (message, 1);
-				runParticle ();
+				if (selected != null) {
+					selected.SendMessage (message, 1, SendMessageOptions.DontRequireReceiver);
+					runParticle ();
+				}
 			}
 		}
 	}
