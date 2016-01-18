@@ -7,4 +7,4 @@ Add a component implementing the `IBehavior` interface to a `GameObject`. All ne
 
 ## License
 
-[https://github.com/DavidMann10k/Marionette/blob/master/license.txt](Apache 2.0)
+[Apache 2.0](https://github.com/DavidMann10k/Marionette/blob/master/license.txt)
