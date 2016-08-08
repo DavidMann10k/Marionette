@@ -19,6 +19,7 @@ namespace Marionette
 
 		void OnTriggerEnter (Collider collider)
 		{
+			if (!collider.isTrigger)
 			if (collider.gameObject.tag == "Agent")
 				NearbyAgents.Add (collider.gameObject);
 		}

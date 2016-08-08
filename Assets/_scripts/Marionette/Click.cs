@@ -7,7 +7,7 @@ namespace Marionette
 	// Utility class for use with components with Click methods
 	public class Click : MonoBehaviour
 	{
-		public static event EventHandler<SelectGameObjectArgs> SelectgGameObject;
+		public static event EventHandler<SelectGameObjectArgs> SelectGameObject;
 
 		public ParticleSystem particle;
 
@@ -34,8 +34,8 @@ namespace Marionette
 		void ClickParticle (Vector3 position)
 		{
 			particle.transform.position = position;
-			particle.Clear();
-			particle.Play();
+			particle.Clear ();
+			particle.Play ();
 
 			var em = particle.emission;
 			em.enabled = true;
@@ -43,7 +43,7 @@ namespace Marionette
 
 		void RaiseSelectGameObjectEvent (GameObject game_object)
 		{
-			EventHandler<SelectGameObjectArgs> handler = SelectgGameObject;
+			EventHandler<SelectGameObjectArgs> handler = SelectGameObject;
 			if (handler != null) {
 				handler (this, new SelectGameObjectArgs (game_object));
 			}

@@ -14,7 +14,7 @@ namespace Marionette
 		// Use this for initialization
 		void Start ()
 		{
-			Click.SelectgGameObject += new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
+			Click.SelectGameObject += new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
 		}
 
 		void OnSelectGameObject (object sender, SelectGameObjectArgs e)
