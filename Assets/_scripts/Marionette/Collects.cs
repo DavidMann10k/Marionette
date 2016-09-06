@@ -6,14 +6,14 @@ namespace Marionette
 {
 	// Adds collecting behavior to an AI agent
 	[RequireComponent (typeof(Marionette))]
-	[RequireComponent (typeof(Senses))]
+	[RequireComponent (typeof(PhysicsDrivenSenses))]
 	public class Collects : MonoBehaviour, IBehavior
 	{
 		[SerializeField]
 		List<string> item_names;
 
 		Marionette marionette;
-		Senses senses;
+		PhysicsDrivenSenses senses;
 
 		public void ConcludeDirective (IDirective directive)
 		{
@@ -23,7 +23,7 @@ namespace Marionette
 		void Awake ()
 		{
 			marionette = GetComponent<Marionette> ();
-			senses = GetComponent<Senses> ();
+			senses = GetComponent<PhysicsDrivenSenses> ();
 		}
 
 		void Start ()

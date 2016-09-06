@@ -7,16 +7,27 @@ public class Spawner : MonoBehaviour
 
 	public float Interval;
 
+	public int limit;
+
 	public GameObject Prefab;
 
-	// Use this for initialization
-	void Start ()
+	private float last_spawn_time = 0f;
+
+	private int count = 0;
+
+	void Update ()
 	{
-		InvokeRepeating ("spawn", 0, Interval);
+		if (count < limit) {
+			if (Time.time > last_spawn_time + Interval) {
+				last_spawn_time = Time.time;
+				spawn ();
+			}
+		}
 	}
 
 	void spawn ()
 	{
 		Instantiate (Prefab, transform.position, Quaternion.identity);
+		count += 1;
 	}
 }

@@ -1,71 +1,36 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Marionette
 {
-	// a collection of tools used to mimic senses such as sight or smell
-	[RequireComponent (typeof(Marionette))]
-	[RequireComponent (typeof(Rigidbody))]
 	public class Senses : MonoBehaviour
 	{
-		public SphereCollider AwarenessCollider;
-
-		public List<GameObject> NearbyAgents;
-
 		public bool DebugSenses = true;
+		private Vector3 sensing_bounds_size = new Vector3 (10f, 10f, 10f);
 
-		void OnTriggerEnter (Collider collider)
+		void Update ()
 		{
-			if (!collider.isTrigger)
-			if (collider.gameObject.tag == "Agent")
-				NearbyAgents.Add (collider.gameObject);
-		}
-
-		void OnTriggerExit (Collider collider)
-		{
-			if (NearbyAgents.Contains (collider.gameObject))
-				NearbyAgents.Remove (collider.gameObject);
-		}
-
-		private IEnumerable<PositionItemPair> FindProximateItems ()
-		{
-			var colliders = Physics.OverlapSphere (transform.position, 5);
-			var inventories = colliders.Select (i => i.gameObject.GetComponent<Inventory> ()).Where (j => j != null);
-			var pairs = inventories.SelectMany (v => v.Items, (v, i) => new PositionItemPair (v.transform.position, i));
-			return pairs;
-		}
-
-		private PositionItemPair MostProximateItem (Vector3 origin)
-		{
-			// TODO: pretty dirty, replace when it becomes a problem
-			var items_with_distance = FindProximateItems ().Select (i => new { position = i.Position, item = i.Item, distance = Vector3.Distance (origin, i.Position) });
-			var item = items_with_distance.OrderBy (i => i.distance).First ();
-			return new PositionItemPair (item.position, item.item);
+//			var nearby_sensables = Sensable.Search (new Bounds (this.transform.position, sensing_bounds_size));
 		}
 
 		void OnDrawGizmos ()
 		{
-			if (DebugSenses) {
-				foreach (GameObject go in NearbyAgents) {
-					Gizmos.DrawLine (transform.position, go.transform.position);
+			var watch = new Stopwatch ();
+			watch.Start ();
+			if (DebugSenses && Application.isPlaying) {
+				var nearby_sensables = Sensable.Search (new Bounds (this.transform.position, sensing_bounds_size));
+
+				foreach (Sensable sensable in nearby_sensables) {
+					Gizmos.DrawLine (transform.position, sensable.transform.position);
 				}
 			}
-		}
-	}
 
-	class PositionItemPair
-	{
-		public Vector3 Position { get; private set; }
 
-		public InventoryItem Item { get; private set; }
-
-		public PositionItemPair (Vector3 position, InventoryItem item)
-		{
-			this.Position = position;
-			this.Item = item;
+			watch.Stop ();
+			if (watch.Elapsed.Milliseconds > 0)
+				UnityEngine.Debug.Log ("DRAW GIZMOS: " + watch.Elapsed.Milliseconds.ToString ());
 		}
 	}
 }
