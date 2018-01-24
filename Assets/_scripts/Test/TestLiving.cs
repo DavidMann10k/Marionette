@@ -6,14 +6,7 @@ public class TestLiving : MonoBehaviour
 {
 	public ParticleSystem particle;
 
-	Select select;
-
 	string message = "OnDamage";
-
-	void Start()
-	{
-		select = GetComponent<Select> ();
-	}
 
 	void runParticle (GameObject go)
 	{
