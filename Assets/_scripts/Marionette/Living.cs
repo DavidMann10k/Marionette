@@ -29,7 +29,7 @@ namespace Marionette
 
 		void OnDeath ()
 		{
-			var ps = Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
+			Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
 			gameObject.AddComponent<Dead> ();
 			Destroy (this);
 		}

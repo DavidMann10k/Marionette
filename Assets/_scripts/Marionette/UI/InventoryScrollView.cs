@@ -33,12 +33,12 @@ namespace Marionette.UI
 
 		void Start ()
 		{
-			Click.SelectGameObject += new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
+			Click.ClickEvent += new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
 		}
 
 		void OnDestroy ()
 		{
-			Click.SelectGameObject -= new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
+			Click.ClickEvent -= new EventHandler<SelectGameObjectArgs> (OnSelectGameObject);
 		}
 	}
 }
