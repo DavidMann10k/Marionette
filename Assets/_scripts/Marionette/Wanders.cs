@@ -10,6 +10,10 @@ namespace Marionette
 	{
 		[SerializeField]
 		float distance = 5;
+
+		[SerializeField]
+		float pause_duration = 1;
+
 		Marionette marionette;
 
 		public void ConcludeDirective (IDirective directive)
@@ -28,7 +32,7 @@ namespace Marionette
 
 		void CreatePauseDirective ()
 		{
-			marionette.AddDirective (new PauseDirective (1, this));
+			marionette.AddDirective (new PauseDirective (pause_duration, this));
 		}
 
 		void Start ()
@@ -40,7 +44,6 @@ namespace Marionette
 		Vector3 RandomNearbyPosition {
 			get {
 				var randomVector = UnityEngine.Random.insideUnitCircle * distance;
-				// TODO: replace with pathfinding determined destination
 				return marionette.transform.position + new Vector3 (randomVector.x, 0, randomVector.y);
 			}
 		}

@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dead : MonoBehaviour
+namespace Marionette
 {
-	
+	public class Dead : MonoBehaviour
+	{
+		
+	}
 }

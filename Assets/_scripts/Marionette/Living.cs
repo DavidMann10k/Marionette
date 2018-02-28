@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Marionette
 {
-	public class Living : MonoBehaviour
+	public class Living : MonoBehaviour, IDies
 	{
 		public Observable<int> Life {
 			get { return life; }
@@ -15,11 +16,32 @@ namespace Marionette
 
 		public GameObject OnDeathparticle;
 
+		public event EventHandler<DeathArgs> DeathEvent;
+
 		public void OnDamage (int damage)
 		{
 			life.Value -= damage;
-			if (life.Value <= 0)
-				gameObject.SendMessage ("OnDeath");
+			if (life.Value <= 0) {
+				foreach (IDies component in gameObject.GetComponents<IDies> ()) {
+					component.OnDeath ();
+				}
+			}
+		}
+
+		public void OnDeath ()
+		{
+			Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
+			gameObject.AddComponent<Dead> ();
+			RaiseDeathEvent ();
+			Destroy (this);
+		}
+
+		void RaiseDeathEvent ()
+		{
+			EventHandler<DeathArgs> handler = DeathEvent;
+			if (handler != null) {
+				handler (this, new DeathArgs ());
+			}
 		}
 
 		void Awake ()
@@ -27,11 +49,6 @@ namespace Marionette
 			life = new Observable<int> (InitialLife);
 		}
 
-		void OnDeath ()
-		{
-			Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
-			gameObject.AddComponent<Dead> ();
-			Destroy (this);
-		}
+		public class DeathArgs : EventArgs {}
 	}
 }

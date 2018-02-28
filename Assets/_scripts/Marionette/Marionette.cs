@@ -5,10 +5,10 @@ using System.Linq;
 namespace Marionette
 {
 	// The central consciousness of a Marionette AI controlled agent
-	[RequireComponent (typeof(Locomotion))]
+	[RequireComponent (typeof(Navigator))]
 	public class Marionette : MonoBehaviour
 	{
-		public ILocomotion locomotion { get; private set; }
+		public INavigator navigator { get; private set; }
 
 		List<IDirective> directives = new List<IDirective> ();
 
@@ -22,7 +22,7 @@ namespace Marionette
 
 		private void Start ()
 		{
-			locomotion = gameObject.GetComponent<ILocomotion> ();
+			navigator = gameObject.GetComponent<INavigator> ();
 		}
 
 		void Update ()

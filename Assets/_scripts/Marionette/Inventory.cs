@@ -12,6 +12,7 @@ namespace Marionette
 
 		public IEnumerable<InventoryItem> Items { get { return items; } }
 
+		[SerializeField]
 		List<InventoryItem> items = new List<InventoryItem> ();
 
 		public void Store (InventoryItem inventoryItem)

@@ -5,20 +5,20 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22490602}
-  - 222: {fileID: 22239290}
-  - 114: {fileID: 11486800}
-  - 114: {fileID: 11409306}
-  - 114: {fileID: 11460676}
+  - component: {fileID: 22490602}
+  - component: {fileID: 22239290}
+  - component: {fileID: 11486800}
+  - component: {fileID: 11409306}
+  - component: {fileID: 11460676}
   m_Layer: 5
   m_Name: Scene Select Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &11409306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,6 +39,8 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
 --- !u!114 &11460676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneNames:
   - Living
-  - Sensing
+  - Inventory
   ButtonPrefab: {fileID: 11432892, guid: 322d2c74901e84d48834637ccf7961ff, type: 2}
 --- !u!114 &11486800
 MonoBehaviour:
@@ -99,6 +101,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -200}

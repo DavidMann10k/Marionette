@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Marionette
 {
-	// Directive for moving to a point in wold space
+	// Directive pausing all action
 	public class PauseDirective : IDirective
 	{
 		public int Priority { get; private set; }

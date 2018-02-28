@@ -22,7 +22,7 @@ namespace Marionette
 		public void Execute (Marionette caller)
 		{
 //			Debug.Log ("Executing move directive");
-			caller.locomotion.MoveTo (destination);
+			caller.navigator.MoveTo (destination);
 		}
 
 		public bool IsComplete (Marionette caller)

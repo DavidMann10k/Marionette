@@ -18,10 +18,10 @@ namespace Marionette
 			throw new NotImplementedException ();
 		}
 
-		void Awake ()
-		{
+//		void Awake ()
+//		{
 //			marionette = GetComponent<Marionette> ();
-		}
+//		}
 
 		void Start ()
 		{

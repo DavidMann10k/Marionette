@@ -7,7 +7,13 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/_scenes/alpha.unity
+    guid: 19c9ed3b0124ded4980cd9bb05afff9b
   - enabled: 1
     path: Assets/_scenes/demonstrations/Living.unity
+    guid: 4e8e054c03af14eda97a3fc70e990b6a
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/_scenes/demonstrations/Sensing.unity
+    path: Assets/_scenes/demonstrations/Inventory.unity
+    guid: 2e2d81227fb86fd41ba47b04e08d19a8

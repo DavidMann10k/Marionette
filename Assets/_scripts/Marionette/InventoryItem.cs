@@ -1,9 +1,14 @@
-﻿namespace Marionette
+﻿using UnityEngine;
+using System;
+
+namespace Marionette
 {
+	[Serializable]
 	public struct InventoryItem
 	{
 		public string ItemName { get { return item_name; } }
 
+		[SerializeField]
 		string item_name;
 
 		public InventoryItem (string item_name)

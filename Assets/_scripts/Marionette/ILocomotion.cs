@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-public interface ILocomotion
-{
-	void MoveTo (Vector3 destination);
+public interface ILocomotion {
+	void Move (Vector3 velocity);
 }
