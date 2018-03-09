@@ -9,6 +9,9 @@ namespace Marionette {
 		[SerializeField]
 		GameObject ItemPanelPrefab;
 
+		[SerializeField]
+		Transform ItemsPanel;
+
 		Select select;
 		Inventory current_inventory;
 
@@ -46,8 +49,9 @@ namespace Marionette {
 			ClearItemPanels ();
 
 			foreach (var item in current_inventory.Items) {
-				var go = Instantiate (ItemPanelPrefab, transform);
+				var go = Instantiate (ItemPanelPrefab, ItemsPanel);
 				go.GetComponentInChildren<Text> ().text = item.ItemName;
+				go.SetActive (true);
 				item_panels.Add(go);
 			}
 		}
