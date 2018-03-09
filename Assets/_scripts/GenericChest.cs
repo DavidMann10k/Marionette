@@ -13,6 +13,7 @@ public class GenericChest : MonoBehaviour
 
 		for (int i = 0; i < 5; i++) {
 			inventory.Store (new InventoryItem ("Gold"));
+			inventory.Store (new InventoryItem ("Sword"));
 		}
 	}
 }
