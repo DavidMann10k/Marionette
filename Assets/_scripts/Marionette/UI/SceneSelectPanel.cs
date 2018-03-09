@@ -19,8 +19,7 @@ namespace Marionette.UI
 		void Start ()
 		{
 			foreach (string scene_name in SceneNames) {
-				var button = Instantiate (ButtonPrefab);
-				button.transform.SetParent (gameObject.transform);
+				var button = Instantiate (ButtonPrefab, gameObject.transform);
 				button.GetComponentInChildren<Text> ().text = scene_name;
 				AddHandler (button, scene_name);
 			}
