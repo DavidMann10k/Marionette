@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Marionette.Utilities;
 
 namespace Marionette
 {
@@ -20,6 +21,10 @@ namespace Marionette
 			for (int i = 0; i < 3; i++) {
 				if (Input.GetMouseButtonUp (i)) {
 					sendClick (i);
+
+					if (i == (int)MouseButton.Left) {
+						ClickParticle (hit.point);
+					}
 				}
 			}
 		}
@@ -31,7 +36,6 @@ namespace Marionette
 
 			if (Physics.Raycast (ray, out hit)) {
 				RaiseClickEvent (hit.collider.gameObject, mouse_index);
-				ClickParticle (hit.point);
 			} else {
 				RaiseClickEvent (null, mouse_index);
 			}
