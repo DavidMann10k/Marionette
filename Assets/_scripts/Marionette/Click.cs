@@ -44,14 +44,8 @@ namespace Marionette
 		// plays the particle effect at the position supplied
 		void ClickParticle (Vector3 position)
 		{
-			if (particle != null) {
-				particle.transform.position = position;
-				particle.Clear ();
-				particle.Play ();
-
-				var em = particle.emission;
-				em.enabled = true;
-			}
+			particle.transform.position = position;
+			particle.Play ();
 		}
 
 		void RaiseClickEvent (GameObject game_object, int mouse_index)

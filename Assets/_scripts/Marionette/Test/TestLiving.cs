@@ -29,12 +29,8 @@ namespace Marionette.Test
 
 		void runParticle (GameObject go)
 		{
-			particle.Clear ();
 			particle.transform.position = go.transform.position;
 			particle.Play ();
-
-			var em = particle.emission;
-			em.enabled = true;
 		}
 	}
 }
