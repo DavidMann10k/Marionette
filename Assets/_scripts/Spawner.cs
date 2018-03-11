@@ -7,6 +7,8 @@ public class Spawner : MonoBehaviour
 
 	public float Interval;
 
+	public float Range;
+
 	public int limit;
 
 	public GameObject Prefab;
@@ -27,7 +29,8 @@ public class Spawner : MonoBehaviour
 
 	void spawn ()
 	{
-		Instantiate (Prefab, transform.position, Quaternion.identity);
+		var pos = new Vector3 (Random.Range (-Range, Range), transform.position.y, Random.Range (-Range, Range));
+		Instantiate (Prefab, pos, Quaternion.identity);
 		count += 1;
 	}
 }
