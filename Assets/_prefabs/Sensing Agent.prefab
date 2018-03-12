@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 114355884999931808}
   - component: {fileID: 114928481079334712}
   - component: {fileID: 114107916420028306}
+  - component: {fileID: 114861619645611150}
   m_Layer: 0
   m_Name: Sensing Agent
   m_TagString: Untagged
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1129857094446298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31652cb1b0073cb4d95e6b61c33a9af3, type: 3}
   m_Name: 
@@ -203,6 +204,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 10
   pause_duration: 5
+--- !u!114 &114861619645611150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129857094446298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26203b6b2d913b429268a7dabe2813b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Range: 10
 --- !u!114 &114928481079334712
 MonoBehaviour:
   m_ObjectHideFlags: 1
