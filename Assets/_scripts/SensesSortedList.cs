@@ -62,8 +62,11 @@ public class SensesSortedList : MonoBehaviour {
 		nearby_senses_cache.Clear ();
 		
 		foreach (IndexItem i in senses_list) {
-			if ((i.Object.transform.position - transform.position).sqrMagnitude < SenseRange * SenseRange)
-				nearby_senses_cache.Add (i.Object);
+			if (true) {
+				if (IsInRange (i.Object.transform.position)) {
+					nearby_senses_cache.Add (i.Object);
+				}
+			}
 		}
 	}
 
