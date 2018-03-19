@@ -458,12 +458,12 @@ Prefab:
     - target: {fileID: 224366100682201856, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000046433124
+      value: 0.000009026553
       objectReference: {fileID: 0}
     - target: {fileID: 224003207405508566, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.00000011920929
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b3d986b463b70b43a11be0e8dbdfc0e, type: 2}
@@ -911,11 +911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257b35921d9eaf4438e7c1f619029c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect:
-    x: 0
-    y: 0
-    width: 0
-    height: 0
+  cell_size: {x: 10, y: 0, z: 10}
+  depth: {x: 10, y: 1, z: 10}
 --- !u!4 &1513659302
 Transform:
   m_ObjectHideFlags: 0
@@ -923,7 +920,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513659300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 533.25085, y: 324.55472, z: 287.2516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
