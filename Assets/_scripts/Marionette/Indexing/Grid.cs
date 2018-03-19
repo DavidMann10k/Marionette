@@ -1,6 +1,6 @@
 ﻿namespace Marionette.Indexing {
 	public struct Grid<T> {
-		Cell<T>[,] Cells { get { return cells; } }
+		public Cell<T>[,] Cells { get { return cells; } }
 		public int Width { get { return width; } }
 		public int Depth { get { return depth; } }
 

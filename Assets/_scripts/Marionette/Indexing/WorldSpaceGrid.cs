@@ -4,6 +4,7 @@ namespace Marionette.Indexing {
 	public struct WorldSpaceGrid<T> {
 		
 		public Bounds2D Bounds { get { return new Bounds2D (position, Vector2.Scale(cell_size, new Vector2(grid.Width, grid.Depth))); } }
+		public Cell<T>[,] Cells { get { return grid.Cells; } }
 
 		Vector2 cell_size;
 		Vector3 position;
