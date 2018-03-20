@@ -16,6 +16,10 @@ namespace Marionette.Indexing {
 			this.position = position;
 		}
 
+		public void Insert(T obj) {
+			grid.Insert (obj);
+		}
+
 		public Vector2 CellMin(int cell_x, int cell_y) {
 			return new Vector2 (
 				Bounds.min.x + cell_x * cell_size.x,

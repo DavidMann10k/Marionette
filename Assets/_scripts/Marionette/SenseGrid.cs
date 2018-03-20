@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Marionette {
 	public class SenseGrid : MonoBehaviour {
-		
+		public static SenseGrid Instance { get;	private set; }
+
 		[SerializeField]
 		int depth = 10;
 
@@ -21,21 +22,43 @@ namespace Marionette {
 		Vector2 cell_size { get { return new Vector2(cell_width, cell_depth); } }
 
 		Indexing.WorldSpaceGrid<Sensable> grid;
+		void Awake() {
+			EnforceSingleton ();
+		}
+
+		void EnforceSingleton ()
+		{
+			if (Instance == null) {
+				Instance = this;
+			}
+			else
+				if (Instance != this) {
+					Destroy (gameObject);
+				}
+		}
+
+		public void InsertSensable(Sensable sensable) {
+			grid.Insert (sensable);
+		}
 
 		void OnValidate() {
 			grid = new Indexing.WorldSpaceGrid<Sensable> (width, depth, cell_size, transform.position);
 		}
 
 		void OnDrawGizmos(){
+			Gizmos.color = Color.green;
+			GizmosDrawGrid ();
+			Gizmos.color = Color.cyan;
+			GizmosDrawBounds ();
+		}
+
+		void GizmosDrawGrid ()
+		{
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < depth; y++) {
-					Gizmos.color = Color.green;
 					GizmosDrawSquare (grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y);
-
 				}
 			}
-			Gizmos.color = Color.red;
-			GizmosDrawBounds ();
 		}
 
 		void GizmosDrawBounds(){
