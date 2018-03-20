@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Marionette {
 	public class Sensable : MonoBehaviour {
-		
+		SenseGrid grid;
+		Bounds Bounds { get; set; }
+
 		void Start () {
-			
-		}
-		
-		// Update is called once per frame
-		void Update () {
-			
+			grid = SenseGrid.Instance;
+			grid.InsertSensable (this);
+			Bounds = GetComponent<Renderer> ().bounds;
 		}
 	}
 }
