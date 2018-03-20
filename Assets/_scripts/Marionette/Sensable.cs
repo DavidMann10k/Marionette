@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Marionette {
-	public class Sensable : MonoBehaviour {
+	public class Sensable : MonoBehaviour, Indexing.IGridItem {
 		SenseGrid grid;
 		Bounds Bounds { get; set; }
 

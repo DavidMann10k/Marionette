@@ -15,7 +15,7 @@ namespace Marionette {
 		[SerializeField]
 		float cell_width = 1.0f;
 
-		[SerializeField]
+//		[SerializeField]
 		float cell_depth = 1.0f;
 
 		Vector2 size { get { return new Vector2(width, depth); } }
@@ -57,6 +57,9 @@ namespace Marionette {
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < depth; y++) {
 					GizmosDrawSquare (grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y);
+					for ( int i = 0; i < grid.Cells [x, y].ItemCount; i++ ) {
+						GizmosDrawSquare(grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y + (0.1f * i));
+					}
 				}
 			}
 		}

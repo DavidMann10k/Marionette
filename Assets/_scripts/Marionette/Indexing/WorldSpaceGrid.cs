@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Marionette.Indexing {
-	public struct WorldSpaceGrid<T> {
+	public struct WorldSpaceGrid<T> where T : IGridItem {
 		
 		public Bounds2D Bounds { get { return new Bounds2D (position, Vector2.Scale(cell_size, new Vector2(grid.Width, grid.Depth))); } }
 		public Cell<T>[,] Cells { get { return grid.Cells; } }
