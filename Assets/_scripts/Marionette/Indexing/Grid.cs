@@ -19,10 +19,6 @@
 				}
 			}
 		}
-
-		public void Insert(T obj) {
-			
-		}
 	}
 }
 

@@ -15,7 +15,7 @@ namespace Marionette {
 		[SerializeField]
 		float cell_width = 1.0f;
 
-//		[SerializeField]
+		[SerializeField]
 		float cell_depth = 1.0f;
 
 		Vector2 size { get { return new Vector2(width, depth); } }
@@ -46,7 +46,6 @@ namespace Marionette {
 		}
 
 		void OnDrawGizmos(){
-			Gizmos.color = Color.green;
 			GizmosDrawGrid ();
 			Gizmos.color = Color.cyan;
 			GizmosDrawBounds ();
@@ -56,23 +55,25 @@ namespace Marionette {
 		{
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < depth; y++) {
+					Gizmos.color = Color.green;
 					GizmosDrawSquare (grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y);
 					for ( int i = 0; i < grid.Cells [x, y].ItemCount; i++ ) {
-						GizmosDrawSquare(grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y + (0.1f * i));
+						Gizmos.color = Color.red;
+						GizmosDrawSquare(grid.CellMin (x, y), grid.CellMax (x, y), transform.position.y + (i * 0.1f + 0.1f));
 					}
 				}
 			}
 		}
 
 		void GizmosDrawBounds(){
-			GizmosDrawSquare (grid.Bounds.min, grid.Bounds.max, transform.position.y);
+			GizmosDrawSquare (grid.Min, grid.Max, transform.position.y);
 		}
 
-		void GizmosDrawSquare(Vector2 min, Vector2 max, float y){
-			Gizmos.DrawLine(new Vector3(min.x, y, min.y), new Vector3(max.x, y, min.y));
-			Gizmos.DrawLine(new Vector3(max.x, y, min.y), new Vector3(max.x, y, max.y));
-			Gizmos.DrawLine(new Vector3(max.x, y, max.y), new Vector3(min.x, y, max.y));
-			Gizmos.DrawLine(new Vector3(min.x, y, max.y), new Vector3(min.x, y, min.y));
+		void GizmosDrawSquare(Vector3 min, Vector3 max, float y){
+			Gizmos.DrawLine(new Vector3(min.x, y, min.z), new Vector3(max.x, y, min.z));
+			Gizmos.DrawLine(new Vector3(max.x, y, min.z), new Vector3(max.x, y, max.z));
+			Gizmos.DrawLine(new Vector3(max.x, y, max.z), new Vector3(min.x, y, max.z));
+			Gizmos.DrawLine(new Vector3(min.x, y, max.z), new Vector3(min.x, y, min.z));
 		}
 	}
 }
