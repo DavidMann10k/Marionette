@@ -18,9 +18,6 @@ namespace Marionette {
 		[SerializeField]
 		float cell_depth = 1.0f;
 
-//		Vector3 size { get { return new Vector3(width, 0, depth); } }
-//		Vector3 cell_size { get { return new Vector3(cell_width, 0, cell_depth); } }
-
 		Indexing.WorldSpaceGrid<Sensable> grid;
 		void Awake() {
 			EnforceSingleton ();

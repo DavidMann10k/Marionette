@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Marionette.Indexing {
-	public class Cell<T> where T : IGridItem {
+	public class Cell<T> {
 		
 		public int ItemCount { get { return items.Count; } }
 

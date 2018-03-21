@@ -4,8 +4,13 @@ namespace Marionette.Indexing {
 	public struct WorldSpaceGrid<T> where T : IGridItem {
 		
 		public Cell<T>[,] Cells { get { return grid.Cells; } }
-		public Vector3 Min { get { return position + new Vector3 (-grid.Width * 0.5f, 0, -grid.Depth * 0.5f); } }
-		public Vector3 Max { get { return position + new Vector3 (+grid.Width * 0.5f, 0, +grid.Depth * 0.5f); } }
+		public Vector3 Min { get { return position; } }
+
+		public Vector3 Max {
+			get {
+				return position + new Vector3 (grid.Width * cell_width, 0, grid.Depth * cell_depth);
+			}
+		}
 
 		float cell_width;
 		float cell_depth;
@@ -20,22 +25,17 @@ namespace Marionette.Indexing {
 		}
 
 		public void Insert(T item) {
-			var bounds = item.Bounds;
-			float min_x = bounds.min.x - Min.x;
-			float max_x = bounds.max.x - Min.x;
-			float min_y = bounds.min.y - Min.z;
-			float max_y = bounds.max.y - Min.z;
+			Bounds2D bounds = item.Bounds;
 
-			int xmin = Mathf.Max (Mathf.FloorToInt (min_x / cell_width), 0);
-			int xmax = Mathf.Min (Mathf.FloorToInt (max_x / cell_width), grid.Width - 1);
-			int ymin = Mathf.Max (Mathf.FloorToInt (min_y / cell_depth), 0);
-			int ymax = Mathf.Min (Mathf.FloorToInt (max_y / cell_depth), grid.Depth - 1);
+			// convert center from wourld to grid space
+			Vector2 center = new Vector2 (
+				(item.Bounds.Center.x - position.x) / cell_depth,
+				(item.Bounds.Center.y - position.y) / cell_width);
+			Vector2 size = new Vector2 (
+				item.Bounds.Size.x / cell_width,
+				item.Bounds.Size.y / cell_depth);
 
-			for (int y = ymin; y <= ymax; y++) {
-				for (int x = xmin; x <= xmax; x++) {
-					Cells [x, y].Add (item);
-				}
-			}
+			grid.Insert (item, new Bounds2D(center, size));
 		}
 
 		public Vector3 CellMin(int cell_x, int cell_y) {
@@ -45,10 +45,6 @@ namespace Marionette.Indexing {
 		public Vector3 CellMax(int cell_x, int cell_y) {
 			return CellMin (cell_x, cell_y) + new Vector3(cell_width, 0, cell_depth);
 		}
-
-//		public Vector3 CellCenter(int cell_x, int cell_y) {
-//			return CellMin (cell_x, cell_y) + cell_size * 0.5f;
-//		}
 	}
 }
 
