@@ -6,7 +6,6 @@ namespace Marionette.Indexing {
 		public Vector2 Size { get { return size; } }
 		public Vector2 min { get { return Center - Size * 0.5f; } }
 		public Vector2 max { get { return Center + Size * 0.5f; } }
-		public Rect Rect { get { return new Rect (Center, Size); } }
 
 		Vector2 center;
 		Vector2 size;
