@@ -18,8 +18,8 @@ namespace Marionette {
 		[SerializeField]
 		float cell_depth = 1.0f;
 
-		Vector2 size { get { return new Vector2(width, depth); } }
-		Vector2 cell_size { get { return new Vector2(cell_width, cell_depth); } }
+//		Vector3 size { get { return new Vector3(width, 0, depth); } }
+//		Vector3 cell_size { get { return new Vector3(cell_width, 0, cell_depth); } }
 
 		Indexing.WorldSpaceGrid<Sensable> grid;
 		void Awake() {
@@ -42,7 +42,7 @@ namespace Marionette {
 		}
 
 		void OnValidate() {
-			grid = new Indexing.WorldSpaceGrid<Sensable> (width, depth, cell_size, transform.position);
+			grid = new Indexing.WorldSpaceGrid<Sensable> (width, depth, cell_width, cell_depth, transform.position);
 		}
 
 		void OnDrawGizmos(){

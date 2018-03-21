@@ -7,13 +7,15 @@ namespace Marionette.Indexing {
 		public Vector3 Min { get { return position + new Vector3 (-grid.Width * 0.5f, 0, -grid.Depth * 0.5f); } }
 		public Vector3 Max { get { return position + new Vector3 (+grid.Width * 0.5f, 0, +grid.Depth * 0.5f); } }
 
-		Vector2 cell_size;
+		float cell_width;
+		float cell_depth;
 		Vector3 position;
 		Grid<T> grid;
 
-		public WorldSpaceGrid(int width, int depth, Vector2 cell_size, Vector3 position) {
+		public WorldSpaceGrid(int width, int depth, float cell_width, float cell_depth, Vector3 position) {
 			grid = new Grid<T> (width, depth);
-			this.cell_size = cell_size;
+			this.cell_width = cell_width;
+			this.cell_depth = cell_depth;
 			this.position = position;
 		}
 
@@ -24,10 +26,10 @@ namespace Marionette.Indexing {
 			float min_y = bounds.min.y - Min.z;
 			float max_y = bounds.max.y - Min.z;
 
-			int xmin = Mathf.Max (Mathf.FloorToInt (min_x / cell_size.x), 0);
-			int xmax = Mathf.Min (Mathf.FloorToInt (max_x / cell_size.x), grid.Width - 1);
-			int ymin = Mathf.Max (Mathf.FloorToInt (min_y / cell_size.y), 0);
-			int ymax = Mathf.Min (Mathf.FloorToInt (max_y / cell_size.y), grid.Depth - 1);
+			int xmin = Mathf.Max (Mathf.FloorToInt (min_x / cell_width), 0);
+			int xmax = Mathf.Min (Mathf.FloorToInt (max_x / cell_width), grid.Width - 1);
+			int ymin = Mathf.Max (Mathf.FloorToInt (min_y / cell_depth), 0);
+			int ymax = Mathf.Min (Mathf.FloorToInt (max_y / cell_depth), grid.Depth - 1);
 
 			for (int y = ymin; y <= ymax; y++) {
 				for (int x = xmin; x <= xmax; x++) {
@@ -37,11 +39,11 @@ namespace Marionette.Indexing {
 		}
 
 		public Vector3 CellMin(int cell_x, int cell_y) {
-			return Min + new Vector3 (cell_size.x * cell_x, 0, cell_size.y * cell_y);
+			return Min + new Vector3 (cell_width * cell_x, 0, cell_depth * cell_y);
 		}
 
 		public Vector3 CellMax(int cell_x, int cell_y) {
-			return CellMin (cell_x, cell_y) + new Vector3(cell_size.x, 0, cell_size.y);
+			return CellMin (cell_x, cell_y) + new Vector3(cell_width, 0, cell_depth);
 		}
 
 //		public Vector3 CellCenter(int cell_x, int cell_y) {
