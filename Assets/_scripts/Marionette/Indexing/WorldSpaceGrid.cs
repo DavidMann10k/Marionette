@@ -30,7 +30,7 @@ namespace Marionette.Indexing {
 			// convert center from wourld to grid space
 			Vector2 center = new Vector2 (
 				(item.Bounds.Center.x - position.x) / cell_depth,
-				(item.Bounds.Center.y - position.y) / cell_width);
+				(item.Bounds.Center.y - position.z) / cell_width);
 			Vector2 size = new Vector2 (
 				item.Bounds.Size.x / cell_width,
 				item.Bounds.Size.y / cell_depth);
