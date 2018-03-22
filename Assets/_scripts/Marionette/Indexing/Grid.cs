@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 namespace Marionette.Indexing {
 	public struct Grid<T> {
@@ -11,12 +12,12 @@ namespace Marionette.Indexing {
 		int depth;
 
 		public Grid(int width, int depth) {
-			this.width = width;
-			this.depth = depth;
+			this.width = Mathf.Max(width, 1);
+			this.depth = Mathf.Max(depth, 1);
 
-			cells = new Cell<T>[width,depth];
-			for (int x = 0; x < width; x++) {
-				for (int y = 0; y < depth; y++) {
+			cells = new Cell<T>[this.width, this.depth];
+			for (int x = 0; x < this.width; x++) {
+				for (int y = 0; y < this.depth; y++) {
 					cells [x, y] = new Cell<T> ();
 				}
 			}
@@ -33,6 +34,12 @@ namespace Marionette.Indexing {
 				for (int x = xmin; x <= xmax; x++) {
 					cells [x, y].Add (item);
 				}
+			}
+		}
+
+		public void Remove(T item) {
+			foreach (Cell<T> cell in cells) {
+					cell.Remove (item);
 			}
 		}
 	}

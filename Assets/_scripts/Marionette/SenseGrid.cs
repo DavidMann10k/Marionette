@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Marionette.Indexing;
 using UnityEngine;
 
 namespace Marionette {
+	[ExecuteInEditMode]
 	public class SenseGrid : MonoBehaviour {
+		
 		public static SenseGrid Instance { get;	private set; }
 
 		[SerializeField]
@@ -19,8 +23,22 @@ namespace Marionette {
 		float cell_depth = 1.0f;
 
 		Indexing.WorldSpaceGrid<Sensable> grid;
+
+		public void InsertSensable(Sensable sensable) {
+			grid.Insert (sensable);
+		}
+
+		public void RemoveSensable(Sensable sensable) {
+			grid.Remove (sensable);
+		}
+
+		void InstantiateGrid() {
+			grid = new WorldSpaceGrid<Sensable> (width, depth, cell_width, cell_depth, transform.position);
+		}
+
 		void Awake() {
 			EnforceSingleton ();
+			InstantiateGrid ();
 		}
 
 		void EnforceSingleton ()
@@ -28,18 +46,17 @@ namespace Marionette {
 			if (Instance == null) {
 				Instance = this;
 			}
-			else
-				if (Instance != this) {
-					Destroy (gameObject);
-				}
-		}
-
-		public void InsertSensable(Sensable sensable) {
-			grid.Insert (sensable);
+			else if (Instance != this) {
+				Destroy (gameObject);
+			}
 		}
 
 		void OnValidate() {
-			grid = new Indexing.WorldSpaceGrid<Sensable> (width, depth, cell_width, cell_depth, transform.position);
+			InstantiateGrid ();
+			width = Mathf.Clamp (width, 1, 1000);
+			depth = Mathf.Clamp (depth, 1, 1000);
+			cell_width = Mathf.Clamp (cell_width, 0.001f, 1000);
+			cell_depth = Mathf.Clamp (cell_depth, 0.001f, 1000);
 		}
 
 		void OnDrawGizmos(){

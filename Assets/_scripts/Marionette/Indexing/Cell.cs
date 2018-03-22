@@ -5,18 +5,23 @@ namespace Marionette.Indexing {
 		
 		public int ItemCount { get { return items.Count; } }
 
-		LinkedList<T> items;
+		HashSet<T> items;
 
 		public Cell() {
-			items = new LinkedList<T> ();
+			items = new HashSet<T> ();
+
 		}
 
 		public void Add(T item) {
-			items.AddFirst(item);
+			items.Add(item);
 		}
 
 		public void Remove(T item) {
 			items.Remove(item);
+		}
+
+		public bool Contains(T item) {
+			return items.Contains (item);
 		}
 	}
 }

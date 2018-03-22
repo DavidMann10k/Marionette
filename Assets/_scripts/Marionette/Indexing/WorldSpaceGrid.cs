@@ -38,6 +38,10 @@ namespace Marionette.Indexing {
 			grid.Insert (item, new Bounds2D(center, size));
 		}
 
+		public void Remove(T item) {
+			grid.Remove (item);
+		}
+
 		public Vector3 CellMin(int cell_x, int cell_y) {
 			return Min + new Vector3 (cell_width * cell_x, 0, cell_depth * cell_y);
 		}
