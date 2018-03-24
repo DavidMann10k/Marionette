@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Marionette.Indexing;
+﻿using Marionette.Indexing;
 using UnityEngine;
 
 namespace Marionette {

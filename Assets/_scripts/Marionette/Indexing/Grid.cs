@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 
 namespace Marionette.Indexing {
 	public struct Grid<T> {
