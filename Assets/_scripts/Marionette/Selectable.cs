@@ -6,6 +6,7 @@ namespace Marionette {
 	// Makes a GameObject respond to being selected by Select
 	// Manages a selected object and a collection of selected objects
 	// Controls outline by registering with GlowController
+	[RequireComponent(typeof(Collider))]
 	public class Selectable : MonoBehaviour, IGlow {
 
 		public static List<Selectable> SelectedObjects {
