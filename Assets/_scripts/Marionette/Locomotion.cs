@@ -39,7 +39,7 @@ namespace Marionette
 		float GetFloorHeight() {
 			ray.origin = transform.position;
 			ray.direction = Vector3.down;
-			Physics.Raycast (ray, out hit, mask);
+			Physics.Raycast (ray, out hit, 100, mask);
 			return hit.point.y;
 		}
 	}
