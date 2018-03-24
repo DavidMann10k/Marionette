@@ -398,7 +398,7 @@ Prefab:
     - target: {fileID: 224570853437330160, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 224570853437330160, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
@@ -423,7 +423,7 @@ Prefab:
     - target: {fileID: 224089465520628022, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -46
       objectReference: {fileID: 0}
     - target: {fileID: 224089465520628022, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
@@ -448,7 +448,7 @@ Prefab:
     - target: {fileID: 224493429325214032, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -89
       objectReference: {fileID: 0}
     - target: {fileID: 224493429325214032, guid: 2b3d986b463b70b43a11be0e8dbdfc0e,
         type: 2}
@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interval: 0.1
-  Range: 10
+  Range: 20
   limit: 100
   Prefab: {fileID: 1129857094446298, guid: 85115f282a7869145bf2a931884e3c33, type: 2}
 --- !u!4 &1610314204

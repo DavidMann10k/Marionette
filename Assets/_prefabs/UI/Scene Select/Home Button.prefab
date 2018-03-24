@@ -141,6 +141,7 @@ MonoBehaviour:
   SceneNames:
   - Living
   - Inventory
+  - Senses
   ButtonPrefab: {fileID: 11432892, guid: 322d2c74901e84d48834637ccf7961ff, type: 2}
 --- !u!114 &114867810180180612
 MonoBehaviour:

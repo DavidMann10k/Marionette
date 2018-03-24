@@ -28,10 +28,6 @@ GameObject:
   - component: {fileID: 114457377269567736}
   - component: {fileID: 114623991645256522}
   - component: {fileID: 114022225836885462}
-  - component: {fileID: 114355884999931808}
-  - component: {fileID: 114928481079334712}
-  - component: {fileID: 114107916420028306}
-  - component: {fileID: 114861619645611150}
   - component: {fileID: 114746471295221836}
   m_Layer: 0
   m_Name: Sensing Agent
@@ -129,18 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e01d0c46fa5d7d4396969d72d88c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114107916420028306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129857094446298}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31652cb1b0073cb4d95e6b61c33a9af3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Range: 5
 --- !u!114 &114299148215141728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,19 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
---- !u!114 &114355884999931808
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129857094446298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758ec3b6fc5639f43ab7207527309072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitialLife: 1
-  OnDeathparticle: {fileID: 173346, guid: 6c943d2274302431f82f2be8a46359a4, type: 2}
 --- !u!114 &114457377269567736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -216,27 +187,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 10
   pause_duration: 5
---- !u!114 &114861619645611150
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129857094446298}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d26203b6b2d913b429268a7dabe2813b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SenseRange: 10
---- !u!114 &114928481079334712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129857094446298}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d1359860a0e6a4ba4206e285de30b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Range: 5
