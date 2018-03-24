@@ -25,7 +25,7 @@ namespace Marionette {
 		Indexing.WorldSpaceGrid<Sensable> grid;
 
 		public void InsertSensable(Sensable sensable) {
-			grid.Insert (sensable);
+			grid.InsertBoundsItem (sensable, sensable.Bounds);
 		}
 
 		public void RemoveSensable(Sensable sensable) {

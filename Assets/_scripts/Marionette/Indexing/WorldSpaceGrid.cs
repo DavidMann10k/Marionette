@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Marionette.Indexing {
-	public struct WorldSpaceGrid<T> where T : IGridItem {
+	public struct WorldSpaceGrid<T> {
 		
 		public Cell<T>[,] Cells { get { return grid.Cells; } }
 		public Vector3 Min { get { return position; } }
@@ -24,16 +24,15 @@ namespace Marionette.Indexing {
 			this.position = position;
 		}
 
-		public void Insert(T item) {
-			Bounds2D bounds = item.Bounds;
+		public void InsertBoundsItem(T item, Bounds2D bounds) {
 
 			// convert center from wourld to grid space
 			Vector2 center = new Vector2 (
-				(item.Bounds.Center.x - position.x) / cell_depth,
-				(item.Bounds.Center.y - position.z) / cell_width);
+				(bounds.Center.x - position.x) / cell_depth,
+				(bounds.Center.y - position.z) / cell_width);
 			Vector2 size = new Vector2 (
-				item.Bounds.Size.x / cell_width,
-				item.Bounds.Size.y / cell_depth);
+				bounds.Size.x / cell_width,
+				bounds.Size.y / cell_depth);
 
 			grid.Insert (item, new Bounds2D(center, size));
 		}
