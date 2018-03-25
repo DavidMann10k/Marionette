@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_scenes/demonstrations/Inventory.unity
     guid: 2e2d81227fb86fd41ba47b04e08d19a8
+  - enabled: 1
+    path: Assets/_scenes/demonstrations/Senses.unity
+    guid: 6c6ff3d43fd542b4990c5ee55553cf24
