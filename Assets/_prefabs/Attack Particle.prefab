@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4978304343550122}
   - component: {fileID: 198568542677268116}
   - component: {fileID: 199594545173744706}
-  - component: {fileID: 114256692558147872}
   m_Layer: 0
   m_Name: Attack Particle
   m_TagString: Untagged
@@ -42,17 +41,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114256692558147872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1283062027588894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 432cdc7c24de5a343996ecbe7119e8fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &198568542677268116
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -113,7 +101,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2102762761
+  randomSeed: -118759963
   InitialModule:
     serializedVersion: 3
     enabled: 1

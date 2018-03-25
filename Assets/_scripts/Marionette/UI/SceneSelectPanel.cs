@@ -5,29 +5,31 @@ using UnityEngine.SceneManagement;
 
 namespace Marionette.UI
 {
-	public class SceneSelectPanel : MonoBehaviour
-	{
-		public string[] SceneNames;
+    public class SceneSelectPanel : MonoBehaviour
+    {
+        [SerializeField]
+        string[] sceneNames = null;
 
-		public Button ButtonPrefab;
+        [SerializeField]
+        Button buttonPrefab = null;
 
-		public void ToggleEnabled ()
-		{
-			gameObject.SetActive (!gameObject.activeSelf);
-		}
+        public void ToggleEnabled()
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
 
-		void Start ()
-		{
-			foreach (string scene_name in SceneNames) {
-				var button = Instantiate (ButtonPrefab, gameObject.transform);
-				button.GetComponentInChildren<Text> ().text = scene_name;
-				AddHandler (button, scene_name);
-			}
-		}
+        void Start()
+        {
+            foreach (string scene_name in sceneNames) {
+                var button = Instantiate(buttonPrefab, gameObject.transform);
+                button.GetComponentInChildren<Text>().text = scene_name;
+                AddHandler(button, scene_name);
+            }
+        }
 
-		void AddHandler (Button button, string scene_name)
-		{
-			button.onClick.AddListener (() => SceneManager.LoadScene (scene_name));
-		}
-	}
+        void AddHandler(Button button, string scene_name)
+        {
+            button.onClick.AddListener(() => SceneManager.LoadScene(scene_name));
+        }
+    }
 }

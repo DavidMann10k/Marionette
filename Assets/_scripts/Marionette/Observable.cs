@@ -2,46 +2,36 @@
 
 namespace Marionette
 {
-	public class Observable<T>
-	{
-		public T Value {
-			get { return t; }
-			set {
-				t = value;
-				RaiseValueChangeEvent (value);
-			}
-		}
+    public class Observable<T>
+    {
+        T t;
 
-		public event EventHandler<ObservableEventArgs<T>> ValueChange;
+        public Observable(T t)
+        {
+            this.t = t;
+        }
 
-		T t;
+        public event EventHandler<ObservableEventArgs<T>> ValueChange;
 
-		public Observable (T t)
-		{
-			this.t = t;
-		}
+        public T Value {
+            get {
+                return t;
+            }
 
-		public override string ToString ()
-		{
-			return t.ToString ();
-		}
+            set {
+                t = value;
+                RaiseValueChangeEvent(value);
+            }
+        }
 
-		void RaiseValueChangeEvent (T new_value)
-		{
-			EventHandler<ObservableEventArgs<T>> handler = ValueChange;
-			if (handler != null) {
-				handler (this, new ObservableEventArgs<T> (new_value));
-			}
-		}
-	}
+        public override string ToString() { return t.ToString(); }
 
-	public class ObservableEventArgs<T> : EventArgs
-	{
-		public T Value { get; private set; }
-
-		public ObservableEventArgs (T t)
-		{
-			Value = t;
-		}
-	}
+        void RaiseValueChangeEvent(T new_value)
+        {
+            EventHandler<ObservableEventArgs<T>> handler = ValueChange;
+            if (handler != null) {
+                handler(this, new ObservableEventArgs<T>(new_value));
+            }
+        }
+    }
 }

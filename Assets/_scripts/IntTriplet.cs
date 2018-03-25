@@ -1,8 +1,4 @@
-﻿// <copyright file="IntTriplet.cs"  company="David A. Mann">
-//     Copyright (c) David A. Mann. All rights reserved.
-// </copyright>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 

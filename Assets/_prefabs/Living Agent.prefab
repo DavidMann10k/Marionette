@@ -187,5 +187,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758ec3b6fc5639f43ab7207527309072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialLife: 1
-  OnDeathparticle: {fileID: 173346, guid: 6c943d2274302431f82f2be8a46359a4, type: 2}
+  initialLife: 1
+  deathparticle: {fileID: 173346, guid: 6c943d2274302431f82f2be8a46359a4, type: 2}
