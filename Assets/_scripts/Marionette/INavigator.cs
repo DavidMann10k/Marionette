@@ -2,8 +2,8 @@
 
 namespace Marionette
 {
-	public interface INavigator
-	{
-		void MoveTo (Vector3 destination);
-	}
+    public interface INavigator
+    {
+        void MoveTo(Vector3 destination);
+    }
 }

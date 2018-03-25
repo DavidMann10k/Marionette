@@ -1,70 +1,73 @@
-﻿using System;
+﻿using Marionette.Utilities;
+using System;
 using UnityEngine;
-using Marionette.Utilities;
 
 namespace Marionette
 {
-	// Manages ClickEvent
-	//   broadcasts the clicked GameObject and a mouse button index
-	public class Click : MonoBehaviour
-	{
-		public event EventHandler<ClickArgs> ClickEvent;
+    // Manages ClickEvent
+    //   broadcasts the clicked GameObject and a mouse button index
+    public class Click : MonoBehaviour
+    {
+        [SerializeField]
+        ParticleSystem particle = null;
 
-		[SerializeField]
-		ParticleSystem particle = null;
+        Ray ray;
 
-		Ray ray;
-		RaycastHit hit;
+        RaycastHit hit;
 
-		void Update ()
-		{
-			for (int i = 0; i < 3; i++) {
-				if (Input.GetMouseButtonUp (i)) {
-					sendClick (i);
+        public event EventHandler<ClickArgs> ClickEvent;
 
-					if (i == (int)MouseButton.Left) {
-						ClickParticle (hit.point);
-					}
-				}
-			}
-		}
+        void Update()
+        {
+            for (int i = 0; i < 3; i++) {
+                if (Input.GetMouseButtonUp(i)) {
+                    SendClick(i);
 
-		// Raises a click even with a GameObject and mouse button index
-		void sendClick (int mouse_index)
-		{
-			ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+                    if (i == (int)MouseButton.Left) {
+                        ClickParticle(hit.point);
+                    }
+                }
+            }
+        }
 
-			if (Physics.Raycast (ray, out hit)) {
-				RaiseClickEvent (hit.collider.gameObject, mouse_index);
-			} else {
-				RaiseClickEvent (null, mouse_index);
-			}
-		}
+        // Raises a click even with a GameObject and mouse button index
+        void SendClick(int mouse_index)
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		// plays the particle effect at the position supplied
-		void ClickParticle (Vector3 position)
-		{
-			particle.transform.position = position;
-			particle.Play ();
-		}
+            if (Physics.Raycast(ray, out hit)) {
+                RaiseClickEvent(hit.collider.gameObject, mouse_index);
+            }
+            else {
+                RaiseClickEvent(null, mouse_index);
+            }
+        }
 
-		void RaiseClickEvent (GameObject game_object, int mouse_index)
-		{
-			if (ClickEvent != null) {
-				ClickEvent (this, new ClickArgs (game_object, mouse_index));
-			}
-		}
+        // plays the particle effect at the position supplied
+        void ClickParticle(Vector3 position)
+        {
+            particle.transform.position = position;
+            particle.Play();
+        }
 
-		public class ClickArgs : EventArgs
-		{
-			public GameObject GameObject { get; set; }
-			public int MouseIndex { get; set; }
+        void RaiseClickEvent(GameObject game_object, int mouse_index)
+        {
+            if (ClickEvent != null) {
+                ClickEvent(this, new ClickArgs(game_object, mouse_index));
+            }
+        }
 
-			public ClickArgs (GameObject game_object, int mouse_index)
-			{
-				GameObject = game_object;
-				MouseIndex = mouse_index;
-			}
-		}
-	}
+        public class ClickArgs : EventArgs
+        {
+            public ClickArgs(GameObject game_object, int mouse_index)
+            {
+                GameObject = game_object;
+                MouseIndex = mouse_index;
+            }
+
+            public GameObject GameObject { get; set; }
+
+            public int MouseIndex { get; set; }
+        }
+    }
 }

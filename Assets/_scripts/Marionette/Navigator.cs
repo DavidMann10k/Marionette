@@ -5,59 +5,59 @@ using UnityEngine;
 
 namespace Marionette
 {
-	[RequireComponent(typeof(Locomotion))]
-	public class Navigator : MonoBehaviour, INavigator, IDies {
+    [RequireComponent(typeof(Locomotion))]
+    public class Navigator : MonoBehaviour, INavigator, IDies
+    {
+        const float ARRIVAL_DISTANCE = 0.1f;
 
-		// editor properties
-		public float speed = 1f;
+        [SerializeField]
+        float speed = 1f;
 
-		// components
-		ILocomotion locomotion;
+        ILocomotion locomotion;
 
-		Vector3? destination;
+        Vector3? destination;
 
-		const float arrival_distance = 0.1f;
+        public void MoveTo(Vector3 destination)
+        {
+            this.destination = destination;
+        }
 
-		public void MoveTo(Vector3 destination) {
-			this.destination = destination;
-		}
+        public void OnDeath()
+        {
+            this.enabled = false;
+        }
 
-		public void OnDeath ()
-		{
-			this.enabled = false;
-		}
+        bool ArrivedAt(Vector3 point)
+        {
+            return (((point.x - transform.position.x) * (point.x - transform.position.x)) +
+                ((point.z - transform.position.z) * (point.z - transform.position.z))) <
+                ARRIVAL_DISTANCE * ARRIVAL_DISTANCE;
+        }
 
-		bool ArrivedAt (Vector3 point)
-		{
-			return ((point.x - transform.position.x) * (point.x - transform.position.x) +
-				(point.z - transform.position.z) * (point.z - transform.position.z)) <
-			arrival_distance * arrival_distance;
-		}
+        Vector3 DistanceTo(Vector3 point)
+        {
+            return point - transform.position;
+        }
 
-		Vector3 DistanceTo (Vector3 point) {
-			return point - transform.position;
-		}
+        void Awake()
+        {
+            locomotion = GetComponent<ILocomotion>();
+        }
 
-		void Awake () {
-			locomotion = GetComponent<ILocomotion> ();
-		}
-
-		void Update () {
-			if (destination != null) 
-			{
-				// if within arrival distance of destination
-				if ((destination.Value - transform.position).sqrMagnitude < arrival_distance * arrival_distance)
-				{
-					destination = null;
-				}
-				else
-				{
-					locomotion.Move ((destination.Value - transform.position).normalized * speed);
-				}
-			} else {
-				// no destination, nowhere to go
-			}
-		}
-	}
-
+        void Update()
+        {
+            if (destination != null) {
+                // if within arrival distance of destination
+                if ((destination.Value - transform.position).sqrMagnitude < ARRIVAL_DISTANCE * ARRIVAL_DISTANCE) {
+                    destination = null;
+                }
+                else {
+                    locomotion.Move((destination.Value - transform.position).normalized * speed);
+                }
+            }
+            else {
+                // no destination, nowhere to go
+            }
+        }
+    }
 }

@@ -3,35 +3,34 @@ using UnityEngine;
 
 namespace Marionette
 {
-	// Directive pausing all action
-	public class PauseDirective : IDirective
-	{
-		public int Priority { get; private set; }
+    // Directive pausing all action
+    public class PauseDirective : IDirective
+    {
+        float duration = 1000;
 
-		public IBehavior Behavior { get; private set; }
+        float pause_start;
 
-		private float duration = 1000;
+        public PauseDirective(float duration, IBehavior caller)
+        {
+            Behavior = caller;
+            this.duration = duration;
+            this.pause_start = Time.time;
+            Priority = 1;
+        }
 
-		private float pause_start;
+        public int Priority { get; private set; }
 
-		public PauseDirective (float duration, IBehavior caller)
-		{
-			Behavior = caller;
-			this.duration = duration;
-			this.pause_start = Time.time;
-			Priority = 1;
-		}
+        public IBehavior Behavior { get; private set; }
 
-		public void Execute (Marionette caller)
-		{
-			//			Debug.Log ("Executing pause directive");
-			// do nothing?
-		}
+        public void Execute(Marionette caller)
+        {
+            // Debug.Log ("Executing pause directive");
+            // do nothing?
+        }
 
-		public bool IsComplete (Marionette caller)
-		{
-			return (Time.time >= pause_start + duration);
-		}
-	}
+        public bool IsComplete(Marionette caller)
+        {
+            return Time.time >= pause_start + duration;
+        }
+    }
 }
-

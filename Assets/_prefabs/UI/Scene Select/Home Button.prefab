@@ -138,11 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1040f343c8999449da35824d9610a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneNames:
+  sceneNames:
   - Living
   - Inventory
   - Senses
-  ButtonPrefab: {fileID: 11432892, guid: 322d2c74901e84d48834637ccf7961ff, type: 2}
+  buttonPrefab: {fileID: 11432892, guid: 322d2c74901e84d48834637ccf7961ff, type: 2}
 --- !u!114 &114867810180180612
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,39 +1,39 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace Marionette
 {
-	// adds ability to store InventoryItems
-	public class Inventory : MonoBehaviour
-	{
-		public int ItemCount { get { return items.Count (); } }
+    // adds ability to store InventoryItems
+    public class Inventory : MonoBehaviour
+    {
+        [SerializeField]
+        List<InventoryItem> items = new List<InventoryItem>();
 
-		public IEnumerable<InventoryItem> Items { get { return items; } }
+        public int ItemCount { get { return items.Count(); } }
 
-		[SerializeField]
-		List<InventoryItem> items = new List<InventoryItem> ();
+        public IEnumerable<InventoryItem> Items { get { return items; } }
 
-		public void Store (InventoryItem inventoryItem)
-		{
-			items.Add (inventoryItem);
-		}
+        public void Store(InventoryItem inventoryItem)
+        {
+            items.Add(inventoryItem);
+        }
 
-		public InventoryItem Unstore (InventoryItem item)
-		{
-			items.Remove (item);
-			return item;
-		}
+        public InventoryItem Unstore(InventoryItem item)
+        {
+            items.Remove(item);
+            return item;
+        }
 
-		public InventoryItem UnStore (string name)
-		{
-			return Unstore (items.FirstOrDefault (i => i.ItemName == name));
-		}
+        public InventoryItem UnStore(string name)
+        {
+            return Unstore(items.FirstOrDefault(i => i.ItemName == name));
+        }
 
-		public InventoryItem UnStore ()
-		{
-			return Unstore (items.FirstOrDefault ());
-		}
-	}
+        public InventoryItem UnStore()
+        {
+            return Unstore(items.FirstOrDefault());
+        }
+    }
 }

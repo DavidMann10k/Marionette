@@ -1,6 +1,7 @@
-﻿namespace Marionette {
-	public interface IDies {
-		void OnDeath();
-	}
+﻿namespace Marionette
+{
+    public interface IDies
+    {
+        void OnDeath();
+    }
 }
-

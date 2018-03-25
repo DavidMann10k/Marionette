@@ -1,97 +1,92 @@
-﻿using System.Collections;
-using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Marionette {
-	public class SensesSortedList : MonoBehaviour {
+namespace Marionette
+{
+    public class SensesSortedList : MonoBehaviour
+    {
+        static List<IndexItem> senses_list = new List<IndexItem>();
 
-		public float SenseRange = 10f;
+        [SerializeField]
+        float senseRange = 10f;
 
-		static List<IndexItem> senses_list = new List<IndexItem> ();
-		List<SensesSortedList> nearby_senses_cache = new List<SensesSortedList>();
+        List<SensesSortedList> nearby_senses_cache = new List<SensesSortedList>();
 
-	//	Vector3 indexed_position;
+        IndexItem index_item;
 
-		IndexItem index_item;
+        void Start()
+        {
+            index_item = new IndexItem(transform.position, this);
+            senses_list.Add(index_item);
+        }
 
-		void Start() {
-			index_item = new IndexItem (transform.position, this);
-			senses_list.Add (index_item);
-		}
+        void Update()
+        {
+            CacheNearbySenses();
+            IndexPosition();
+        }
 
-		void Update() {
-			
-			CacheNearbySenses ();
-			IndexPosition ();
-		}
+        void IndexPosition()
+        {
+            index_item.Position = transform.position;
+        }
 
-		void IndexPosition() {
-			index_item.Position = transform.position;
+        [Obsolete]
+        void CacheNearbySensesLinq()
+        {
+            nearby_senses_cache.Clear();
 
-	//		if ((transform.position - indexed_position).sqrMagnitude > .1f)
-	//		{
-	//			indexed_position = transform.position;
-	//
-	//		}
-		}
+            nearby_senses_cache = senses_list.Where(i =>
+                i.Position.x < transform.position.x + senseRange &&
+                i.Position.x > transform.position.x - senseRange &&
+                i.Position.z < transform.position.z + senseRange &&
+                i.Position.z > transform.position.z - senseRange).Select(j => j.Object).ToList();
+        }
 
-		[Obsolete]
-		void CacheNearbySensesLinq()
-		{
-			nearby_senses_cache.Clear ();
+        bool IsInRange(Vector3 point)
+        {
+            return (point - transform.position).sqrMagnitude < senseRange * senseRange;
+        }
 
-			nearby_senses_cache = senses_list.Where( i => 
-				i.Position.x < transform.position.x + SenseRange &&
-				i.Position.x > transform.position.x - SenseRange &&
-				i.Position.z < transform.position.z + SenseRange &&
-				i.Position.z > transform.position.z - SenseRange).Select(j => j.Object).ToList();
-			//		foreach (IndexItem i in senses_list) {
-			//			if ((i.Object.transform.position - transform.position).sqrMagnitude < Range * Range)
-			//				nearby_senses_cache.Add (i.Object);
-			//		}
-		}
+        void CacheNearbySenses()
+        {
+            nearby_senses_cache.Clear();
 
-		bool IsInRange(Vector3 point)
-		{
-			return (point - transform.position).sqrMagnitude < SenseRange * SenseRange;
-		}
+            foreach (IndexItem i in senses_list) {
+                if (true) {
+                    if (IsInRange(i.Object.transform.position)) {
+                        nearby_senses_cache.Add(i.Object);
+                    }
+                }
+            }
+        }
 
-		void CacheNearbySenses()
-		{
-			nearby_senses_cache.Clear ();
-			
-			foreach (IndexItem i in senses_list) {
-				if (true) {
-					if (IsInRange (i.Object.transform.position)) {
-						nearby_senses_cache.Add (i.Object);
-					}
-				}
-			}
-		}
+        void OnDrawGizmos()
+        {
+            foreach (SensesSortedList s in nearby_senses_cache) {
+                Gizmos.DrawLine(transform.position, s.transform.position);
+            }
+        }
 
-		void OnDrawGizmos() {
-			foreach (SensesSortedList s in nearby_senses_cache) {
-				Gizmos.DrawLine (transform.position, s.transform.position);
-			}
-		}
+        void OnDestroy()
+        {
+            senses_list.Remove(index_item);
+        }
 
-		void OnDestroy()
-		{
-			senses_list.Remove (index_item);
-		}
+        struct IndexItem
+        {
+            public IndexItem(Vector3 position, SensesSortedList game_object)
+                : this()
+            {
+                Object = game_object;
+                Position = position;
+            }
 
-		struct IndexItem {
-			public SensesSortedList Object  { get; private set; }
-			public Vector3 Position { get; set; }
+            public SensesSortedList Object { get; private set; }
 
-			public IndexItem (Vector3 position, SensesSortedList game_object)
-				: this()
-			{
-				Object = game_object;
-				Position = position;
-			}
-		}
-	}
+            public Vector3 Position { get; set; }
+        }
+    }
 }

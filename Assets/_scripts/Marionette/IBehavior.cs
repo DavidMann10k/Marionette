@@ -1,9 +1,9 @@
 ﻿namespace Marionette
 {
-	public interface IBehavior
-	{
-		void ConcludeDirective (IDirective directive);
+    public interface IBehavior
+    {
+        void ConcludeDirective(IDirective directive);
 
-		void OnDeath ();
-	}
+        void OnDeath();
+    }
 }

@@ -1,54 +1,58 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Collections;
 
 namespace Marionette
 {
-	public class Living : MonoBehaviour, IDies
-	{
-		public Observable<int> Life {
-			get { return life; }
-		}
+    public class Living : MonoBehaviour, IDies
+    {
+        [SerializeField]
+        int initialLife = 1;
 
-		public int InitialLife = 1;
+        [SerializeField]
+        GameObject deathparticle = null;
 
-		Observable<int> life;
+        Observable<int> life;
 
-		public GameObject OnDeathparticle;
+        public event EventHandler<DeathArgs> DeathEvent;
 
-		public event EventHandler<DeathArgs> DeathEvent;
+        public Observable<int> Life {
+            get { return life; }
+        }
 
-		public void OnDamage (int damage)
-		{
-			life.Value -= damage;
-			if (life.Value <= 0) {
-				foreach (IDies component in gameObject.GetComponents<IDies> ()) {
-					component.OnDeath ();
-				}
-			}
-		}
+        public void OnDamage(int damage)
+        {
+            life.Value -= damage;
+            if (life.Value <= 0) {
+                foreach (IDies component in gameObject.GetComponents<IDies>()) {
+                    component.OnDeath();
+                }
+            }
+        }
 
-		public void OnDeath ()
-		{
-			Instantiate (OnDeathparticle, transform.position, Quaternion.identity);
-			gameObject.AddComponent<Dead> ();
-			RaiseDeathEvent ();
-			Destroy (this);
-		}
+        public void OnDeath()
+        {
+            Instantiate(deathparticle, transform.position, Quaternion.identity);
+            gameObject.AddComponent<Dead>();
+            RaiseDeathEvent();
+            Destroy(this);
+        }
 
-		void RaiseDeathEvent ()
-		{
-			EventHandler<DeathArgs> handler = DeathEvent;
-			if (handler != null) {
-				handler (this, new DeathArgs ());
-			}
-		}
+        void RaiseDeathEvent()
+        {
+            EventHandler<DeathArgs> handler = DeathEvent;
+            if (handler != null) {
+                handler(this, new DeathArgs());
+            }
+        }
 
-		void Awake ()
-		{
-			life = new Observable<int> (InitialLife);
-		}
+        void Awake()
+        {
+            life = new Observable<int>(initialLife);
+        }
 
-		public class DeathArgs : EventArgs {}
-	}
+        public class DeathArgs : EventArgs
+        {
+        }
+    }
 }
