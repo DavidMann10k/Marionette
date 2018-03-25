@@ -7,7 +7,6 @@ namespace Marionette
     // Makes a GameObject respond to being selected by Select
     // Manages a selected object and a collection of selected objects
     // Controls outline by registering with GlowController
-    [RequireComponent(typeof(Collider))]
     public class Selectable : MonoBehaviour, IGlow
     {
         // TODO: determine if there's a better way to do this. Maybe a stack.
@@ -51,6 +50,9 @@ namespace Marionette
         void Awake()
         {
             Renderers = GetComponentsInChildren<Renderer>();
+            if (GetComponent<Collider>() == null) {
+                Debug.LogError("Selectable requires a collider to function");
+            }
         }
     }
 }
