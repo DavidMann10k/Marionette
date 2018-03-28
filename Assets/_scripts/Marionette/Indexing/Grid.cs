@@ -41,6 +41,16 @@ namespace Marionette.Indexing
             }
         }
 
+        public void Insert(T item, Vector2 point)
+        {
+            int x = Mathf.FloorToInt(point.x);
+            int y = Mathf.FloorToInt(point.y);
+
+            if (x >= 0 && x <= width && y >= 0 && y <= depth) {
+                cells[x, y].Add(item);
+            }
+        }
+
         public void Remove(T item)
         {
             foreach (Cell<T> cell in cells) {

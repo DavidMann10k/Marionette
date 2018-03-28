@@ -27,17 +27,26 @@ namespace Marionette.Indexing
             }
         }
 
-        public void InsertBoundsItem(T item, Bounds2D bounds)
+        public void Insert(T item, Bounds2D bounds)
         {
-            // convert center from wourld to grid space
+            // convert center from world to grid space
             Vector2 center = new Vector2(
-                        (bounds.Center.x - position.x) / cell_depth,
-                        (bounds.Center.y - position.z) / cell_width);
+                (bounds.Center.x - position.x) / cell_width,
+                (bounds.Center.y - position.z) / cell_depth);
             Vector2 size = new Vector2(
-                      bounds.Size.x / cell_width,
-                      bounds.Size.y / cell_depth);
+                bounds.Size.x / cell_width,
+                bounds.Size.y / cell_depth);
 
             grid.Insert(item, new Bounds2D(center, size));
+        }
+
+        public void Insert(T item, Vector3 point)
+        {
+            // convert center from wourld to grid space
+            float grid_space_x = (point.x - position.x) / cell_width;
+            float grid_space_z = (point.z - position.z) / cell_depth;
+
+            grid.Insert(item, new Vector2(grid_space_x, grid_space_z));
         }
 
         public void Remove(T item)

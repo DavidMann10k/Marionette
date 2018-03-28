@@ -24,7 +24,8 @@ namespace Marionette
 
         public void InsertSensable(Sensable sensable)
         {
-            grid.InsertBoundsItem(sensable, sensable.Bounds);
+            // grid.Insert(sensable, sensable.Bounds);
+            grid.Insert(sensable, sensable.transform.position);
         }
 
         public void RemoveSensable(Sensable sensable)
