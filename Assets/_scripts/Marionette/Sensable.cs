@@ -1,12 +1,14 @@
 ﻿using Marionette.Indexing;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Marionette
 {
-    public class Sensable : MonoBehaviour, Indexing.IGridItem
+    public class Sensable : MonoBehaviour, Indexing.IGridItem<Sensable>
     {
         SenseGrid grid;
         new Renderer renderer;
+        Cell<Sensable> cell;
 
         public Bounds2D Bounds { 
             get {
@@ -25,17 +27,30 @@ namespace Marionette
             }
         }
 
+        public void OnInsert(Cell<Sensable> cell)
+        {
+            this.cell = cell;
+        }
+
         void Start()
         {
             grid = SenseGrid.Instance;
             grid.InsertSensable(this);
-            grid.RemoveSensable(this);
         }
 
         void Update()
         {
-            grid.RemoveSensable(this);
+            if (cell != null) {
+                RemoveItemFromCell();
+            }
+
             grid.InsertSensable(this);
+        }
+
+        void RemoveItemFromCell()
+        {
+            cell.Remove(this);
+            cell = null;
         }
     }
 }

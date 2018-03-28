@@ -2,7 +2,7 @@
 
 namespace Marionette.Indexing
 {
-    public struct WorldSpaceGrid<T>
+    public struct WorldSpaceGrid<T> where T : IGridItem<T>
     {
         float cell_width;
         float cell_depth;

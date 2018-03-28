@@ -2,7 +2,7 @@
 
 namespace Marionette.Indexing
 {
-    public struct Grid<T>
+    public struct Grid<T> where T : IGridItem<T>
     {
         Cell<T>[,] cells;
         int width;
@@ -37,6 +37,7 @@ namespace Marionette.Indexing
             for (int y = ymin; y <= ymax; y++) {
                 for (int x = xmin; x <= xmax; x++) {
                     cells[x, y].Add(item);
+                    item.OnInsert(cells[x, y]);
                 }
             }
         }
@@ -46,8 +47,9 @@ namespace Marionette.Indexing
             int x = Mathf.FloorToInt(point.x);
             int y = Mathf.FloorToInt(point.y);
 
-            if (x >= 0 && x <= width && y >= 0 && y <= depth) {
+            if (x >= 0 && x < width && y >= 0 && y < depth) {
                 cells[x, y].Add(item);
+                item.OnInsert(cells[x, y]);
             }
         }
 
