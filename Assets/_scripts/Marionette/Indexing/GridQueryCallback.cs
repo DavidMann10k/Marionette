@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Marionette.Indexing
+﻿namespace Marionette.Indexing
 {
     public delegate void GridQueryCallback<T>(T item);
 }

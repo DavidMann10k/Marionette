@@ -2,7 +2,7 @@
 
 namespace Marionette.Indexing
 {
-    public struct WorldSpaceGrid<T> where T : IGridItem<T>
+    public struct WorldSpaceGrid<T>
     {
         float cell_width;
         float cell_depth;
@@ -27,7 +27,7 @@ namespace Marionette.Indexing
             }
         }
 
-        public void Insert(T item, Bounds2D bounds)
+        public void Insert(T item, Bounds2D bounds, GridInsertCallback<T> callback)
         {
             // convert center from world to grid space
             Vector2 center = new Vector2(
@@ -37,7 +37,7 @@ namespace Marionette.Indexing
                 bounds.Size.x / cell_width,
                 bounds.Size.y / cell_depth);
 
-            grid.Insert(item, new Bounds2D(center, size));
+            grid.Insert(item, new Bounds2D(center, size), callback);
         }
 
         public void Query(Bounds2D bounds, GridQueryCallback<T> callback)
@@ -53,13 +53,13 @@ namespace Marionette.Indexing
             grid.Query(new Bounds2D(center, size), callback);
         }
 
-        public void Insert(T item, Vector3 point)
+        public void Insert(T item, Vector3 point, GridInsertCallback<T> callback)
         {
             // convert center from wourld to grid space
             float grid_space_x = (point.x - position.x) / cell_width;
             float grid_space_z = (point.z - position.z) / cell_depth;
 
-            grid.Insert(item, new Vector2(grid_space_x, grid_space_z));
+            grid.Insert(item, new Vector2(grid_space_x, grid_space_z), callback);
         }
 
         public void Remove(T item)

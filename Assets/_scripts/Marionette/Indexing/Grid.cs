@@ -2,7 +2,7 @@
 
 namespace Marionette.Indexing
 {
-    public struct Grid<T> where T : IGridItem<T>
+    public struct Grid<T>
     {
         Cell<T>[,] cells;
         int width;
@@ -27,7 +27,7 @@ namespace Marionette.Indexing
 
         public int Depth { get { return depth; } }
 
-        public void Insert(T item, Bounds2D bounds)
+        public void Insert(T item, Bounds2D bounds, GridInsertCallback<T> callback)
         {
             int xmin = Mathf.Max(Mathf.FloorToInt(bounds.Min.x), 0);
             int xmax = Mathf.Min(Mathf.FloorToInt(bounds.Max.x), width - 1);
@@ -37,19 +37,19 @@ namespace Marionette.Indexing
             for (int y = ymin; y <= ymax; y++) {
                 for (int x = xmin; x <= xmax; x++) {
                     cells[x, y].Add(item);
-                    item.OnInsert(cells[x, y]);
+                    callback(cells[x, y]);
                 }
             }
         }
 
-        public void Insert(T item, Vector2 point)
+        public void Insert(T item, Vector2 point, GridInsertCallback<T> callback)
         {
             int x = Mathf.FloorToInt(point.x);
             int y = Mathf.FloorToInt(point.y);
 
             if (x >= 0 && x < width && y >= 0 && y < depth) {
                 cells[x, y].Add(item);
-                item.OnInsert(cells[x, y]);
+                callback(cells[x, y]);
             }
         }
 

@@ -22,10 +22,10 @@ namespace Marionette
 
         public static SenseGrid Instance { get; private set; }
 
-        public void InsertSensable(Sensable sensable)
+        public void InsertSensable(Sensable sensable, GridInsertCallback<Sensable> callback)
         {
             // grid.Insert(sensable, sensable.Bounds);
-            grid.Insert(sensable, sensable.transform.position);
+            grid.Insert(sensable, sensable.transform.position, callback);
         }
 
         public void RemoveSensable(Sensable sensable)
@@ -83,7 +83,7 @@ namespace Marionette
                     GizmosDrawSquare(grid.CellMin(x, y), grid.CellMax(x, y), transform.position.y);
                     for (int i = 0; i < grid.Cells[x, y].ItemCount; i++) {
                         Gizmos.color = Color.red;
-                        GizmosDrawSquare(grid.CellMin(x, y), grid.CellMax(x, y), transform.position.y + (i * (0.1f + 0.1f)));
+                        GizmosDrawSquare(grid.CellMin(x, y), grid.CellMax(x, y), transform.position.y + ((i * 0.1f) + 0.1f));
                     }
                 }
             }

@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Marionette
 {
-    public class Sensable : MonoBehaviour, Indexing.IGridItem<Sensable>
+    public class Sensable : MonoBehaviour
     {
         SenseGrid grid;
         new Renderer renderer;
         Cell<Sensable> cell;
+        GridInsertCallback<Sensable> insertCallback;
 
         public Bounds2D Bounds { 
             get {
@@ -35,7 +36,8 @@ namespace Marionette
         void Start()
         {
             grid = SenseGrid.Instance;
-            grid.InsertSensable(this);
+            insertCallback = OnInsert;
+            grid.InsertSensable(this, insertCallback);
         }
 
         void Update()
@@ -44,7 +46,7 @@ namespace Marionette
                 RemoveItemFromCell();
             }
 
-            grid.InsertSensable(this);
+            grid.InsertSensable(this, insertCallback);
         }
 
         void RemoveItemFromCell()
