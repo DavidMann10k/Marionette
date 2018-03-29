@@ -13,6 +13,12 @@ namespace Marionette.Indexing
             this.size = size;
         }
 
+        public Bounds2D(Vector2 center, float size)
+        {
+            this.center = center;
+            this.size = new Vector2(size, size);
+        }
+
         public Vector2 Center { get { return center; } }
 
         public Vector2 Size { get { return size; } }
