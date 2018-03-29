@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114623991645256522}
   - component: {fileID: 114022225836885462}
   - component: {fileID: 114746471295221836}
+  - component: {fileID: 114287396312196004}
   m_Layer: 0
   m_Name: Sensing Agent
   m_TagString: Untagged
@@ -43,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1129857094446298}
   m_LocalRotation: {x: 0, y: -0.5764398, z: 0, w: 0.8171397}
-  m_LocalPosition: {x: -59.1, y: 1, z: 1.4}
+  m_LocalPosition: {x: -49.9, y: 1, z: -41.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -125,6 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e01d0c46fa5d7d4396969d72d88c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114287396312196004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129857094446298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d1359860a0e6a4ba4206e285de30b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2
 --- !u!114 &114299148215141728
 MonoBehaviour:
   m_ObjectHideFlags: 1

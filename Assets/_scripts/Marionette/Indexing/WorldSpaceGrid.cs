@@ -40,6 +40,19 @@ namespace Marionette.Indexing
             grid.Insert(item, new Bounds2D(center, size));
         }
 
+        public void Query(Bounds2D bounds, GridQueryCallback<T> callback)
+        {
+            // convert center from world to grid space
+            Vector2 center = new Vector2(
+                (bounds.Center.x - position.x) / cell_width,
+                (bounds.Center.y - position.z) / cell_depth);
+            Vector2 size = new Vector2(
+                bounds.Size.x / cell_width,
+                bounds.Size.y / cell_depth);
+
+            grid.Query(new Bounds2D(center, size), callback);
+        }
+
         public void Insert(T item, Vector3 point)
         {
             // convert center from wourld to grid space

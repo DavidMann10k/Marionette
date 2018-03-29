@@ -13,6 +13,8 @@ namespace Marionette.Indexing
 
         public int ItemCount { get { return items.Count; } }
 
+        public HashSet<T> Items { get { return items; } }
+
         public void Add(T item)
         {
             items.Add(item);

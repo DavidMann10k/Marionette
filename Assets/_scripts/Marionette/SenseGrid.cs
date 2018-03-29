@@ -33,6 +33,11 @@ namespace Marionette
             grid.Remove(sensable);
         }
 
+        public void Query(Bounds2D bounds, GridQueryCallback<Sensable> callback)
+        {
+            grid.Query(bounds, callback);
+        }
+
         void InstantiateGrid()
         {
             grid = new WorldSpaceGrid<Sensable>(width, depth, cell_width, cell_depth, transform.position);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Marionette.Indexing;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +6,33 @@ namespace Marionette
 {
     public class Senses : MonoBehaviour
     {
-        static List<Senses> senses_list = new List<Senses>();
+        SenseGrid grid;
 
         [SerializeField]
         float range = 10f;
 
-        List<Senses> nearby_senses_cache = new List<Senses>();
+        HashSet<Sensable> nearby_senses_cache = new HashSet<Sensable>();
+
+        GridQueryCallback<Sensable> query_callback;
+
+        Bounds2D Bounds { 
+            get {
+                Vector3 center = transform.position;
+                return new Bounds2D(new Vector2(center.x, center.z), range);
+            }
+        }
+
+        void Sense(Sensable sensable)
+        {
+            if ((sensable.transform.position - transform.position).sqrMagnitude < range * range) {
+                nearby_senses_cache.Add(sensable);
+            }
+        }
 
         void Start()
         {
-            senses_list.Add(this);
+            grid = SenseGrid.Instance;
+            query_callback = Sense;
         }
 
         void Update()
@@ -26,23 +43,14 @@ namespace Marionette
         void CacheNearbySenses()
         {
             nearby_senses_cache.Clear();
-            foreach (Senses s in senses_list) {
-                if ((s.transform.position - transform.position).sqrMagnitude < range * range) {
-                    nearby_senses_cache.Add(s);
-                }
-            }
+            grid.Query(Bounds, query_callback);
         }
 
         void OnDrawGizmos()
         {
-            foreach (Senses s in nearby_senses_cache) {
+            foreach (Sensable s in nearby_senses_cache) {
                 Gizmos.DrawLine(transform.position, s.transform.position);
             }
-        }
-
-        void OnDestroy()
-        {
-            senses_list.Remove(this);
         }
     }
 }

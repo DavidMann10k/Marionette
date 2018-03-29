@@ -59,5 +59,21 @@ namespace Marionette.Indexing
                 cell.Remove(item);
             }
         }
+
+        public void Query(Bounds2D bounds, GridQueryCallback<T> callback)
+        {
+            int xmin = Mathf.Max(Mathf.FloorToInt(bounds.Min.x), 0);
+            int xmax = Mathf.Min(Mathf.FloorToInt(bounds.Max.x), width - 1);
+            int ymin = Mathf.Max(Mathf.FloorToInt(bounds.Min.y), 0);
+            int ymax = Mathf.Min(Mathf.FloorToInt(bounds.Max.y), depth - 1);
+
+            for (int y = ymin; y <= ymax; y++) {
+                for (int x = xmin; x <= xmax; x++) {
+                    foreach (T item in cells[x, y].Items) {
+                        callback(item);
+                    }
+                }
+            }
+        }
     }
 }
