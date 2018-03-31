@@ -1,4 +1,5 @@
 ﻿using Marionette.Indexing;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,6 +37,8 @@ namespace Marionette
         void Start()
         {
             grid = SenseGrid.Instance;
+            if (grid == null)
+                throw new Exception("Sensable requires a SenseGrid in the scene to function.");
             insertCallback = OnInsert;
             grid.InsertSensable(this, insertCallback);
         }
